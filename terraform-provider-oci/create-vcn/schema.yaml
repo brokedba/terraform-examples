@@ -1,0 +1,79 @@
+
+    title: "Create a VCN in Oracle Cloud Infrastructure including default route table, DHCP options and subnets"
+    stackDescription: Deploy a VCN in Oracle Cloud Infrastructure including default route table, DHCP options and subnets
+    schemaVersion: 1.1.0
+    version: "20200301"
+    locale: "en"
+
+    variableGroups:
+    - title: General Configuration
+      visible: false
+      variables:
+      - compartment_ocid
+      - tenancy_ocid
+      - region
+
+    - title: Required Configuration
+      visible: true  
+      variables:
+      - vcn_display_name
+
+    - title: Optional Configuration
+      visible: true  
+      variables:
+      - vcn_cidr
+      - subnet_dns_label
+      - vcn_dns_label
+
+    variables:
+
+      compartment_ocid:
+        type: oci:identity:compartment:id
+        # type: string
+        required: true
+        title: Compartment
+        description: Compartment where you want to create the solution resources
+
+      region:
+        type: oci:identity:region:name
+        required: true
+        title: Region
+        description: Region where you want to deploy the resources defined by this stack
+
+      vcn_display_name:
+        type: string
+        required: true
+        title: Virtual Network Display Name
+        description: Display name of the Virtual Network
+
+      vcn_cidr:
+        type: string
+        required: false
+        title: VCN CIDR
+        description: A single, contiguous IPv4 CIDR block of your choice for the VCN
+
+      vcn_dns_label:
+        type: string
+        required: false
+        title: VCN DNS Label
+        description: A DNS label for the VCN, used in conjunction with the VNIC's hostname and subnet's DNS label to form a fully qualified domain name (FQDN) for each VNIC within this subnet
+
+        subnet_display_name:
+          type: string
+          required: false
+          title: subnet Display Name
+          description: Display name of the subnet
+        
+        subnet_cidr:
+          type: string
+          required: false
+          title: subnet CIDR
+          description: A single, contiguous IPv4 CIDR block of your choice for the subnet
+
+        subnet_dns_label:
+          type: string
+          required: false
+          title: Subnet DNS Label
+          description: A DNS label for the subnet, used in conjunction with the VNIC's hostname and subnet's DNS label to form a fully qualified domain name (FQDN) for each VNIC within this subnet
+  
+  
