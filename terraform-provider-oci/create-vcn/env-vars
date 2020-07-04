@@ -1,14 +1,14 @@
 
 # Adapt the below variables to your own tenancy/compartment/region and authentication configuration
 
-export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1..aaaaaaaafud7yerulg2jfk6boz3pdppzpdnznn4tesdmm3rk6skq2ul25g4a"
-export TF_VAR_user_ocid="ocid1.user.oc1..aaaaaaaabdfyv5r3tmm6km3djovwdamclznmlsblo3n4tpm7f5ps4shkhhxq"
-export TF_VAR_compartment_ocid="ocid1.tenancy.oc1..aaaaaaaafud7yerulg2jfk6boz3pdppzpdnznn4tesdmm3rk6skq2ul25g4a"
+export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1..aaaaaaaa"              # change me 
+export TF_VAR_user_ocid="ocid1.user.oc1..aaaaaaaa"                    # change me 
+export TF_VAR_compartment_ocid="ocid1.tenancy.oc1..aaaaaaaa"          # change me 
 
-export TF_VAR_fingerprint=$(cat ../../.oci/oci_api_key_fingerprint)
-export TF_VAR_private_key_path=../../.oci/oci_api_key.pem
+export TF_VAR_fingerprint=$(cat ../../.oci/oci_api_key_fingerprint)   # change me 
+export TF_VAR_private_key_path=../../.oci/oci_api_key.pem             # change me 
 
-export TF_VAR_ssh_public_key=$(cat ../../.ssh/id_rsa.pub)
-export TF_VAR_ssh_private_key=$(cat ../../.ssh/id_rsa)
+export TF_VAR_ssh_public_key=$(cat ../../.ssh/id_rsa.pub)              # change me 
+export TF_VAR_ssh_private_key=$(cat ../../.ssh/id_rsa)                 # change me 
 
-export TF_VAR_region="ca-toronto-1" # change me 
+export TF_VAR_region="ca-toronto-1"                                    # change me 
