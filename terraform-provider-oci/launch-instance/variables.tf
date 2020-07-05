@@ -42,7 +42,7 @@
         default = "50"
       }
       variable "shape" {
-        default = "VM.Standard2.1"
+        default = "VM.Standard.E2.1.Micro"
       }
       variable "instance_image_ocid" {
         type = map
