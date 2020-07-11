@@ -6,7 +6,7 @@ The launch-instance contains both the vcn configuration we used above and the in
  For details on how to run these samples please refere to my blog post 
  https://brokedba.blogspot.com/2020/07/terraform-for-dummies-launch-instance.html
 
-
+![Topology1](https://1.bp.blogspot.com/-xd37jpj29Is/Xv_8fPjXEpI/AAAAAAAABxM/B5XBjEakBpc944IWHIulDDPV9pVcRHKhgCK4BGAsYHg/s853/oci-Terraform.png)
 
 `` Please run either one of them at a time ( apply and destroy before runing the other) as the vcn attributes are the same .
 ``
