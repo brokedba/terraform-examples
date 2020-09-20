@@ -33,6 +33,9 @@
         network_entity_id = oci_core_internet_gateway.gtw.id
       }
     }
+######################
+# Security Lists
+######################
 
 resource "oci_core_security_list" "terra_sl" {
   compartment_id = var.compartment_ocid
