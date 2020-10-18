@@ -15,7 +15,7 @@ write_files:
         </head>
         <body>
         <div class="videoWrapper">
-        <div class="centered"><H1 style="color:#D83623;font-family: Impact, Charcoal, sans-serif;text-shadow: 1px 2px #FFFFF;"> <b> AWS Loco Party </b></h1> </div>
+        <div class="centered"><H1 style="color:#D83623;font-family: Impact, Charcoal, sans-serif;text-shadow: 1px 2px #FFFFF;">Welcome to The <b> AWS Loco Party :D !!!</b></h1> </div>
         <iframe src="https://player.vimeo.com/video/343579787?autoplay=1&color=ff0179&title=0&byline=0&portrait=0" width="1024" height="768" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         </body>
