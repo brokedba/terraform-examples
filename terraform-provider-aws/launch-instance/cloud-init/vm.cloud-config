@@ -1,0 +1,36 @@
+#cloud-config
+write_files:
+-   content: |
+       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+        <head>
+        <title>Here you are Papy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+        .videoWrapper { position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image: linear-gradient(to top,#000000 0%, #000000 100%);}
+        .videoWrapper iframe {  top: 10;left: 50;width: 100%;height: 100%;}
+        .centered {position: absolute;top: 90% ;left: 35%;}
+        </style>
+        </head>
+        <body>
+        <div class="videoWrapper">
+        <div class="centered"><H1 style="color:#D83623;font-family: Impact, Charcoal, sans-serif;text-shadow: 1px 2px #FFFFF;"> <b> AWS Loco Party </b></h1> </div>
+        <iframe src="https://player.vimeo.com/video/343579787?autoplay=1&color=ff0179&title=0&byline=0&portrait=0" width="1024" height="768" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        </body>
+        </html>
+
+    owner: centos:centos
+    path: /home/centos/index.html
+runcmd:
+-   /bin/yum install -y nginx
+-   /bin/systemctl start nginx
+-   /bin/firewall-offline-cmd --add-port=80/tcp
+-   /bin/systemctl restart firewalld
+-   cp /usr/share/nginx/html/index.html /usr/share/nginx/html/index.original.html
+-   cat /home/centos/index.html > /usr/share/nginx/html/index.html
+-   mkfs -t xfs /dev/xvdb
+-   mkdir /data
+-   cp /etc/fstab /etc/fstab.orig
+-   sudo mount /dev/xvdf /data
