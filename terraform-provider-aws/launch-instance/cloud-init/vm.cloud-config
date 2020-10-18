@@ -10,7 +10,7 @@ write_files:
         <style>
         .videoWrapper { position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image: linear-gradient(to top,#000000 0%, #000000 100%);}
         .videoWrapper iframe {  top: 10;left: 50;width: 100%;height: 100%;}
-        .centered {position: absolute;top: 90% ;left: 35%;}
+        .centered {position: absolute;top: 10%;left: 35%;}
         </style>
         </head>
         <body>
