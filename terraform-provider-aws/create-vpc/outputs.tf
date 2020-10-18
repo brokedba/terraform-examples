@@ -60,7 +60,7 @@ output "vpc_dedicated_security_group_id" {
        description = "Security group id. "
        value       = aws_security_group.terra_sg.id
    }
-output "vpc_dedicated_security_ingress_rules" {
+output "SecurityGroup_ingress_rules" {
        description = "Shows ingress rules of the Security group "
        value       = formatlist("%s:  %s" ,aws_security_group.terra_sg.ingress[*].description,formatlist("%s , CIDR: %s", aws_security_group.terra_sg.ingress[*].to_port,aws_security_group.terra_sg.ingress[*].cidr_blocks[0]))
    }      
