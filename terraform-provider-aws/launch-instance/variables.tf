@@ -71,7 +71,7 @@ variable "aws_region" {
      }  
 variable "OS" {
   description = "the selected ami based OS"
-  default       = "RHEL8" 
+  default       = "CENTOS7" 
 }
 
 # VNIC INFO
