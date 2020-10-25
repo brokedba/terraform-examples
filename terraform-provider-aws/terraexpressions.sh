@@ -1,6 +1,8 @@
 ##  Terraform: Expressions  ##
 ##----------------------------
 ## Create a directory and get inside it
+## v0 -- Author Debjeet Bhowmik https://cloudaffaire.com/terraform-expressions/
+## v1 -- brokedba => replaced the vi by a Heredoc (EOF) to print the input into the main.tf and added the terraform init before the apply.
 #mkdir terraform && cd terraform
  
 ## Create main.tf
