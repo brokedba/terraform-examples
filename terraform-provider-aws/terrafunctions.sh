@@ -1,5 +1,6 @@
 ##  Terraform: Functions  ##
 ##--------------------------
+## Author Debjeet Bhowmik : https://cloudaffaire.com/terraform-functions/
 ## Open terraform console
 terraform console
  
