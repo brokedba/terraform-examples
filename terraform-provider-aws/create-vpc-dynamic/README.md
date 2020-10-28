@@ -33,4 +33,5 @@ To consolidate all sg rules combinations in one main map and still call them usi
 # DYNAMIC sg rules using FOR_EACH LOOP and local variable
 resource "aws_security_group_rule" "terra_sg_rule" {
   for_each = local.sg_mapping[var.sg_type] 
+...
 ```
