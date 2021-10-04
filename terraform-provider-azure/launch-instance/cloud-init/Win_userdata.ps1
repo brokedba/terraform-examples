@@ -1,0 +1,32 @@
+#cd C:\Users\azureuser
+Set-ExecutionPolicy Unrestricted -Force
+New-NetFirewallRule -Display 'EC2 HTTP Inbound' -Dir Inbound -Action Allow -Prot TCP -LocalP @('80', '443')
+function down_ngx { 
+    param($url, $filename)
+$client = New-Object System.Net.WebClient
+$client.DownloadFile( $url, $filename)
+}
+
+down_ngx "http://nginx.org/download/nginx-1.19.2.zip" "nginx-1.19.2.zip"
+ #-ExecutionPolicy RemoteSigned -File "download.ps1" "http://nginx.org/download/nginx-1.19.2.zip" "nginx-1.19.2.zip"
+Expand-Archive -Force '.\nginx-1.19.2.zip' '.\' 
+Remove-Item -Path nginx-1.19.2.zip
+cd nginx-1.19.2
+ren html\index.html   "index.original.html"
+cd html
+echo "<!DOCTYPE html PUBLIC `"-//W3C//DTD XHTML 1.1//EN`" `"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd`"><html xmlns=`"http://www.w3.org/1999/xhtml`" xml:lang=`"en`">" >index.html
+echo "<head><title>Here you are Papy</title>">>index.html
+echo "<meta http-equiv=`"Content-Type`" content=`"text/html; charset=UTF-8`" /><style>" >>index.html
+echo ".videoWrapper { position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);}" >>index.html
+echo ".videoWrapper iframe {  top: 10;left: 50;width: 100%;height: 100%;}" >>index.html
+echo ".centered {position: absolute;top: 10%;left: 35%;}</style>" >>index.html
+echo "</head>" >>index.html
+echo "<body>" >>index.html
+echo "<div class=`"videoWrapper`">" >>index.html
+echo "<div class=`"centered`"><H1 style=`"color:#D83623;font-family: Impact, Charcoal, sans-serif;text-shadow: 1px 2px #FFFFF;`">Welcome to The <b> Azure Loco Party :D !!!</b></h1> </div>" >>index.html
+echo "<iframe src=`"https://player.vimeo.com/video/343579787?autoplay=1&color=ff0179&title=0&byline=0&portrait=0`" width=`"1024`" height=`"768`" frameborder=`"0`" allow=`"autoplay; fullscreen`" allowfullscreen></iframe>" >>index.html
+echo "</div>" >>index.html
+echo "</body>" >>index.html
+echo "</html>" >>index.html
+cd ..
+start nginx.exe
