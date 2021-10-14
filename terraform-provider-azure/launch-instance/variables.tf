@@ -1,15 +1,18 @@
-# Aws account region and autehntication 
-#variable "aws_access_key" {}
-#variable "aws_secret_key" {}
-variable "aws_region" {
-    default = "us-east-1"
+# Azure account region and authentication 
+
+variable "prefix" {
+  description = "The prefix used for all resources in this example"
+  default = "TerraDemo"
+}
+variable "az_location" {
+    default = "eastus"
 }
 # VPC INFO
-    variable "vpc_name" {
-      default = "Terravpc"
+    variable "vnet_name" {
+      default = "Terravnet"
     }
     
-    variable "vpc_cidr" {
+    variable "vnet_cidr" {
       default = "192.168.0.0/16"
     }
 
@@ -21,24 +24,10 @@ variable "aws_region" {
     variable "subnet_cidr"{
       default = "192.168.10.0/24"
       } 
-    variable "map_public_ip_on_launch" { 
-      description = "Indicate if instances launched into the VPC's Subnet will be assigned a public IP address . "
-      default = true   
-    }  
-
-# IGW INFO
-    variable "igw_name"{
-      default = "terra-igw" 
-      }
-
-# ROUTE TABLE INFO
-    variable "rt_name"{
-      default = "terra-rt" 
-      }
-# ROUTE TABLE INFO
-    variable "sg_name"{
-      default = "terra-sg" 
-      }      
+    variable "sg_name" {
+    default = "terra_sg"
+    }
+   
 
 # COMPUTE INSTANCE INFO
 
@@ -46,27 +35,54 @@ variable "aws_region" {
         default = "TerraCompute"
       }
 
-      variable "preserve_boot_volume" {
-        default = false
-      }
-      variable "boot_volume_size_in_gbs" {
-        default = "10"
-      }
-      variable "instance_type" {
-        default = "t2.micro"
-      }
-      variable "instance_ami_id" {
-        type = map
 
-        default = {
-        CENTOS8   = "ami-056d1e4814a97ac59"
-        CENTOS7   = "ami-0d0db0aecada009c5"
-        RHEL8     = "ami-09353c38276693bcb"
-        RHEL7     = "ami-01f1bea9a9de3c605"
-        UBUNTU    = "ami-0f40c8f97004632f9"
-       AMAZON_LINUX  = "ami-0947d2ba12ee1ff75"  # Centos 7
-       WINDOWS    = "ami-06f6f33114d2db0b1"
-       SUSE       = "ami-08c68a700c45e62fa"
+      variable "osdisk_size" {
+        default = "30"
+      }
+      variable "vm_size" {
+        default = "Standard_B1s"
+      }
+
+variable  "os_publisher" {
+  default = {
+    CENTOS7 = {
+           publisher = "OpenLogic"
+           offer     = "CentOS"
+           sku       = "7.7"
+           admin     = "centos"
+        },
+    RHEL7  =  {
+          publisher = "RedHat"
+          offer     = "RHEL"
+          sku       = "7lvm-gen2"
+          admin     = "azureuser"
+        },
+    OL7    =  {
+          publisher = "Oracle"
+          offer     = "racle-Linux"
+          sku       = "ol77-ci-gen2"
+        },     
+    WINDOWS    =  {
+          publisher = "MicrosoftWindowsServer"
+          offer     = "WindowsServer"
+          sku       = "2016-Datacenter"
+          admin     = "azureuser"
+        },
+    SUSE       =  {
+          publisher = "SUSE"
+          offer     = "sles-15-sp2-byos"
+          sku       = "gen2"
+          admin     = "azureuser"
+        },
+    UBUNTU       =  {
+          publisher = "Canonical"
+          offer     = "UbuntuServer"
+          sku       = "19_10-daily-gen2"
+          admin     = "azureuser"
+        }
+    
+
+
        }
      }  
 variable "OS" {
@@ -81,49 +97,11 @@ variable "OS" {
       
 # BOOT INFO      
   # user data
-      variable "user_data" {
-        default = "./cloud-init/vm.cloud-config"
-      }     
-      #variable "ssh_public_key" {}
-      variable "block_storage_size_in_gbs" {
-        default = "10"
-      }
+variable "user_data" { 
+  default = "./cloud-init/centos_userdata.txt"
+  }     
+
  # EBS 
-      variable "vol_name" {
-      type        = string
-      default     = "vol_0"
-      description = "The name of the EBS"
-      }
-      variable "ebs_volume_enabled" {
-      type        = bool
-      default     = true
-      description = "Flag to control the ebs creation."
-      }     
-      variable "ebs_volume_type" {
-      type        = string
-      default     = "gp2"
-      description = "The type of EBS volume. Can be standard, gp2 or io1."
-      }
-      variable "ebs_iops" {
-      type        = number
-      default     = 0
-      description = "Amount of provisioned IOPS. This must be set with a volume_type of io1."
-      }
-
-      variable "ebs_volume_size" {
-       type        = number
-       default     = 8
-       description = "Size of the ebs volume in gigabytes."
-      }
-      variable "ebs_device_name" {
-      type        = list(string)
-      default     = ["/dev/xvdb", "/dev/xvdc", "/dev/xvdd", "/dev/xvde", "/dev/xvdf", "/dev/xvdg", "/dev/xvdh", "/dev/xvdi", "/dev/xvdj", "/dev/xvdk", "/dev/xvdl", "/dev/xvdm", "/dev/xvdn", "/dev/xvdo", "/dev/xvdp", "/dev/xvdq", "/dev/xvdr", "/dev/xvds", "/dev/xvdt", "/dev/xvdu", "/dev/xvdv", "/dev/xvdw", "/dev/xvdx", "/dev/xvdy", "/dev/xvdz"]
-      description = "Name of the EBS device to mount."
-      }
-
-      variable "instance_cpus" {
-      default = 1
-      }        
 #
 variable "network_interface" {
   description = "Customize network interfaces to be attached at instance boot time"
