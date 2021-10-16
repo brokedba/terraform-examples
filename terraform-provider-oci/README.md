@@ -12,10 +12,10 @@ The launch-instance contains both the vcn configuration we used above and the in
 ``
 
 
-Terraform Console:
+ **Terraform Console**:
+- ***Functions:*** Although terraform is a declarative language, there are still myriads of functions you can use to process strings/number/lists/mappings etc. 
+you will find an excellent all in one script with examples of most terraform functions in [terrafunctions.sh](https://github.com/brokedba/terraform-examples/blob/master/terraform-provider-azure/terrafunctions.sh) 
 
-Functions: Although terraform is a declarative language, there are still myriads of functions you can use to process strings/number/lists/mappings etc. you will find an excellent all in one script with examples of most terraform functions in terrafunctions.sh
+- ***expressions:***  Same goes for expressions here is a simple shell script that creates a main.tf with multiples expressions and apply it for you [terraexpression.sh](https://github.com/brokedba/terraform-examples/blob/master/terraform-provider-azure/terraexpressions.sh) No need to deploy anything in the cloud it's all local.
 
-expressions: Same goes for expressions here is a simple shell script that creates a main.tf with multiples expressions and apply it for you terraexpression.sh No need to deploy anything in the cloud it's all local.
-
-Credit : CloudaFFair
+Credit : [CloudaFFair](https://cloudaffaire.com/terraform-functions/)
