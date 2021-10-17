@@ -7,8 +7,8 @@ For details on how to run these samples please refere to my [blog post >>](https
 
  **Terraform Console**:
 - ***Functions:*** Although terraform is a declarative language, there are still myriads of functions you can use to process strings/number/lists/mappings etc. 
-you will find an excellent all in one script with examples of most terraform functions in [terrafunctions.sh](https://github.com/brokedba/terraform-examples/blob/master/terraform-provider-azure/terrafunctions.sh) 
+you will find an excellent all in one script with examples of most terraform functions in [terrafunctions.sh](https://github.com/brokedba/terraform-examples/blob/master/terraform-provider-gcp/terrafunctions.sh) 
 
-- ***expressions:***  Same goes for expressions here is a simple shell script that creates a main.tf with multiples expressions and apply it for you [terraexpression.sh](https://github.com/brokedba/terraform-examples/blob/master/terraform-provider-azure/terraexpressions.sh) No need to deploy anything in the cloud it's all local.
+- ***expressions:***  Same goes for expressions here is a simple shell script that creates a main.tf with multiples expressions and apply it for you [terraexpression.sh](https://github.com/brokedba/terraform-examples/blob/master/terraform-provider-gcp/terraexpressions.sh) No need to deploy anything in the cloud it's all local.
 
 Credit : [CloudaFFair](https://cloudaffaire.com/terraform-functions/)
