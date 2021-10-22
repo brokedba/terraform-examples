@@ -26,7 +26,7 @@ data "google_client_config" "current" {
   machine_type = var.vm_type
   
   metadata = {
-   ssh-keys = "${var.admin}:${file("~/id_rsa_gcp.pub")}" 
+   ssh-keys = "${var.admin}:${file("~/id_rsa_gcp.pub")}"   # Change Me
     startup-script        = ("${file(var.user_data)}")
   #  startup-script-custom = "stdlib::info Hello World"
   }
