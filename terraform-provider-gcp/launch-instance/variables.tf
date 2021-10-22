@@ -8,7 +8,7 @@ variable  "gcp_credentials"{
 }
 
 variable "project" {
-  default = "playground-s-11-f538d00c"
+  default = "playground-s-11-f538d00c"   # Change ME
 }
 variable "region" {
     default = "us-east1"
