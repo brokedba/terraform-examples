@@ -20,8 +20,8 @@ export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
 
 ```
 
-#Note
+# Note
 you can try this in my vagrant build if you don't have a KVM environment to play with . It will create a qemu based vm within a virtualbox vm which makes it even cooler !!
- >> GitHub: https://github.com/brokedba/KVM-on-virtualbox
+ > GitHub: https://github.com/brokedba/KVM-on-virtualbox
 
 Enjoy!!
