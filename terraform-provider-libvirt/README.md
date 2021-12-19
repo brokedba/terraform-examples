@@ -13,9 +13,9 @@ This directory contains On-premises Terraform configuration files in order to cr
 
 - In case of nested or non baremetal environment, qemu had to be specified for the vm to launch
 
-Therefore the workaround is to set the below variable: 
+Therefore the workaround is to set the below variable right before runing terraform apply: 
 
-``
+```
 export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu" 
 
-``
+```
