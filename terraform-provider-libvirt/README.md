@@ -1,6 +1,6 @@
 
 KVM Libvirt Provider Examples
-This directory contains On-premises Terraform configuration files in order to create a vrtual machine in a local KVM environment.
+This directory contains On-premises Terraform configuration files in order to create a vrtual machine (Centos 7) in a local KVM environment.
 
 
 # QEMU environments workaround
@@ -19,3 +19,7 @@ Therefore the workaround is to set the below variable right before runing terraf
 export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu" 
 
 ```
+
+#Note
+you can try this in my vagrant build if you don't have a KVM environment to play with . It will create a qemu based vm within a virtualbox vm which makes it even cooler !!
+Enjoy >> GitHub: https://github.com/brokedba/KVM-on-virtualbox
