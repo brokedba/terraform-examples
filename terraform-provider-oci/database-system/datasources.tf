@@ -7,7 +7,7 @@
 # Get DB node list
 data "oci_database_db_nodes" "db_nodes1" {
   compartment_id = var.compartment_ocid
-  db_system_id   = oci_database_db_system.PDB1.id
+  db_system_id   = oci_database_db_system.MYDBSYS.id
 }
 
 ## Get DB node details
@@ -24,7 +24,7 @@ data "oci_core_vnic" "db_node_vnic1" {
 
 data "oci_database_db_homes" "db_homes1" {
   compartment_id = var.compartment_ocid
-  db_system_id   = oci_database_db_system.PDB1.id
+  db_system_id   = oci_database_db_system.MYDBSYS.id
 }
 
 
@@ -35,11 +35,11 @@ data "oci_database_databases" "databases1" {
 
 
 data "oci_database_db_system_patches" "patches1" {
-  db_system_id = oci_database_db_system.PDB1.id
+  db_system_id = oci_database_db_system.MYDBSYS.id
 }
 
 data "oci_database_db_system_patch_history_entries" "patches_history1" {
-  db_system_id = oci_database_db_system.PDB1.id
+  db_system_id = oci_database_db_system.MYDBSYS.id
 }
 
 
@@ -55,7 +55,7 @@ data "oci_database_db_home_patch_history_entries" "patches_history1" {
 
 data "oci_database_db_versions" "test_db_versions_by_db_system_id1" {
   compartment_id = var.compartment_ocid
-  db_system_id   = oci_database_db_system.PDB1.id
+  db_system_id   = oci_database_db_system.MYDBSYS.id
 }
 
 
