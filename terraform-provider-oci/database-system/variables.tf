@@ -17,14 +17,14 @@ variable "vcn_cidr" {
 }
 
 variable "vcn_dns_label" {
-  default = "cin-vcn"
+  default = "terra-vcn"
 }
 # SUBNET INFO
 variable "subnet_dns_label" {
-  default = "cin-subnet"
+  default = "terra-subnet"
 }
 variable "subnet_display_name" {
-  default = "cin-sub"
+  default = "terra-sub"
 }
 
 variable "subnet_cidr" {
@@ -58,7 +58,7 @@ variable "db_admin_password" {
 }
 
 variable "db_name" {
-  default = "FSCDB"
+  default = "MYCDB"
 }
 
 variable "db_version" {
@@ -74,7 +74,7 @@ variable "db_disk_redundancy" {
 }
 
 variable "db_system_display_name" {
-  default = "FSPRODEMO"
+  default = "DBCSDEMO"
 }
 
 variable "hostname" {
@@ -98,7 +98,7 @@ variable "db_workload" {
 }
 
 variable "pdb_name" {
-  default = "FSPROD"
+  default = "PDB1"
 }
 
 variable "data_storage_size_in_gb" {
@@ -139,7 +139,7 @@ variable "ssh_public_key" {
 # Object Storage
 ##############
 variable "bucket_name" {
-  default = "Cinbucket"
+  default = "Mybucket"
 }
 
 # Dictionary Locals
