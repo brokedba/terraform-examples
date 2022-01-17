@@ -2,7 +2,7 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 
-resource "oci_database_db_system" "FSDEMO" {
+resource "oci_database_db_system" "MYDBSYS" {
   availability_domain = var.availability_domain
   compartment_id      = var.compartment_ocid
   #cpu_core_count      = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_core_count"]
