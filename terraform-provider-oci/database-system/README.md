@@ -9,6 +9,7 @@
 18.14.0.0 or 18.16.0.0 or 19.0.0.0 or 19.11.0.0 or 19.12.0.0 or 19.13.0.0 or 21.0.0.0 or 21.3.0.0 or 21.4.0.0.
 ```
 
-- Terraform registry Doc for oci provider is not up to date or the provider has still some bugs not fixed .  
-example  node_count in db_system resource : ![image](https://user-images.githubusercontent.com/29458929/150219444-eb080f56-0d5e-40ea-9276-72e3860755a2.png)
-please check github issues to be sure 
+- Terraform registry Doc for oci provider is not up to date or the provider has still some bugs not fixed. Example  node_count in db_system resource :
+
+ ![image](https://user-images.githubusercontent.com/29458929/150219444-eb080f56-0d5e-40ea-9276-72e3860755a2.png)
+please check provider (github issues https://github.com/terraform-providers/terraform-provider-oci/issues) to be sure 
