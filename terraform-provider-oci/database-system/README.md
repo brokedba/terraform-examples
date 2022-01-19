@@ -1,4 +1,8 @@
 
+
+# Known issues
+- Error Messages: 
+- The database admin Password should not contain word Oracle or Username(sys).
 - The database version must be one of
 ```
 11.2.0.4 or 11.2.0.4.201020 or 11.2.0.4.210119 or 11.2.0.4.210420 or 12.1.0.2 or 12.1.0.2.210420 or 12.1.0.2.210720 or 
