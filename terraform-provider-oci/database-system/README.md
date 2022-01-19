@@ -7,5 +7,5 @@
 ```
 
 - terraform registry Doc for oci provider is not up to date or the provider has still some bugs not fixed .  
-example : ![image](https://user-images.githubusercontent.com/29458929/150219444-eb080f56-0d5e-40ea-9276-72e3860755a2.png)
+example  node_count in db_system resource : ![image](https://user-images.githubusercontent.com/29458929/150219444-eb080f56-0d5e-40ea-9276-72e3860755a2.png)
 please check github issues to be sure 
