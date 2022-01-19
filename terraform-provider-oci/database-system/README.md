@@ -1,7 +1,6 @@
 
 
 # Known issues
-- Error Messages: 
 - The database admin Password should not contain word Oracle or Username(sys).
 - The database version must be one of
 ```
