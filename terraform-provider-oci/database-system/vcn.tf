@@ -34,7 +34,7 @@ data "oci_core_services" "object_storage_svcs" {
 ######################
 # Internet Gateway
 ######################    
-resource "oci_core_internet_gateway" "gtw" {
+resource "oci_core_internet_gateway" "igtw" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_virtual_network.vcnterra.id
   display_name   = "terra-igw"
@@ -53,7 +53,7 @@ resource "oci_core_nat_gateway" "natgw" {
 ########################
 # Object Service gateway
 ########################
-resource "oci_core_service_gateway" "svcgw" {
+resource "oci_core_service_gateway" "obj-svcgw" {
   compartment_id = oci_core_virtual_network.vcnterra.compartment_id
 
   services {
@@ -61,9 +61,10 @@ resource "oci_core_service_gateway" "svcgw" {
   }
 
   vcn_id       = oci_core_virtual_network.vcnterra.id
-  display_name = "${lower(var.vcn_display_name)}-svcgw"
+  display_name = "${lower(var.vcn_display_name)}-obj-storage-svcgw"
 }
 
+/*  Service gateway if DBCS needed more than object storage access
 resource "oci_core_service_gateway" "sg" {
   compartment_id = var.compartment_ocid
   services {
@@ -72,6 +73,7 @@ resource "oci_core_service_gateway" "sg" {
   display_name = "service-gateway"
   vcn_id       = oci_core_virtual_network.vcnterra.id
 }
+*/
 #####################
 # Dynamic Routing GW
 #####################
@@ -99,7 +101,7 @@ resource "oci_core_default_route_table" "rt" {
   route_rules {
     destination       = data.oci_core_services.object_storage_svcs.services[0]["cidr_block"]
     destination_type  = "SERVICE_CIDR_BLOCK"
-    network_entity_id = oci_core_service_gateway.svcgw.id
+    network_entity_id = oci_core_service_gateway.obj-svcgw.id
   }
 
   route_rules {
@@ -112,23 +114,24 @@ resource "oci_core_default_route_table" "rt" {
 resource "oci_core_route_table" "apprt" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_virtual_network.vcnterra.id
-  display_name   = "CloudManager-rt-table"
-
-  route_rules {
-    destination       = lookup(data.oci_core_services.oci_services.services[0], "cidr_block")
-    destination_type  = "SERVICE_CIDR_BLOCK"
-    network_entity_id = oci_core_service_gateway.sg.id
-  }
-  route_rules {
-    destination       = "0.0.0.0/0"
-    network_entity_id = oci_core_internet_gateway.gtw.id
-  }
-
+  display_name   = "App-rt-table"
+/* No need for a service gateway route for public subnets  
+ # route_rules {
+ #   destination       = lookup(data.oci_core_services.oci_services.services[0], "cidr_block")
+ #   destination_type  = "SERVICE_CIDR_BLOCK"
+ #   network_entity_id = oci_core_service_gateway.sg.id
+ # }
+ */
   route_rules {
     destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_nat_gateway.natgw.id
+    network_entity_id = oci_core_internet_gateway.igtw.id
   }
+
+#     route_rules {
+#    destination       = "0.0.0.0/0"
+#    destination_type  = "CIDR_BLOCK"
+#    network_entity_id = oci_core_nat_gateway.natgw.id
+#  }
 }
 
 ######################
@@ -245,11 +248,11 @@ data "oci_identity_availability_domains" "ad1" {
 ######################
 
 resource "oci_core_subnet" "terraDB" {
-  availability_domain        = var.availability_domain
+  availability_domain        = data.oci_identity_availability_domains.ad1.availability_domains[0].name
   cidr_block                 = var.subnet_cidr
-  display_name               = var.subnet_display_name
+  display_name               = var.subnet_db_display_name
   prohibit_public_ip_on_vnic = false
-  dns_label                  = var.subnet_dns_label #"${var.subnet_dns_label}${count.index + 1}"
+  dns_label                  = var.subnet_db_dns_label #"${var.subnet_dns_label}${count.index + 1}"
   compartment_id             = var.compartment_ocid
   vcn_id                     = oci_core_virtual_network.vcnterra.id
   route_table_id             = oci_core_default_route_table.rt.id
@@ -259,11 +262,11 @@ resource "oci_core_subnet" "terraDB" {
 }
 
 resource "oci_core_subnet" "terraApp" {
-  availability_domain        = var.availability_domain
+  availability_domain        = data.oci_identity_availability_domains.ad1.availability_domains[0].name
   cidr_block                 = var.subnet_cidr2
-  display_name               = var.subnet_display_name
+  display_name               = var.subnet_app_display_name
   prohibit_public_ip_on_vnic = false
-  dns_label                  = "(${var.subnet_dns_label})-2"
+  dns_label                  = var.subnet_app_dns_label #"(${var.subnet_dns_label})-2"
   compartment_id             = var.compartment_ocid
   vcn_id                     = oci_core_virtual_network.vcnterra.id
   route_table_id             = oci_core_route_table.apprt.id

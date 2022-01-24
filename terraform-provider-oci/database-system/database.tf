@@ -3,7 +3,7 @@
 
 
 resource "oci_database_db_system" "MYDBSYS" {
-  availability_domain = var.availability_domain
+  availability_domain = data.oci_identity_availability_domains.ad1.availability_domains[0].name
   compartment_id      = var.compartment_ocid
   #cpu_core_count      = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_core_count"]
   database_edition = var.db_edition
@@ -32,7 +32,7 @@ resource "oci_database_db_system" "MYDBSYS" {
   ssh_public_keys         = ["${var.ssh_public_key}"] # == "" ? [tls_private_key.public_private_key_pair.public_key_openssh] : [tls_private_key.public_private_key_pair.public_key_openssh, var.ssh_public_key]
   hostname                = var.hostname
   data_storage_size_in_gb = var.data_storage_size_in_gb
-  # node_count              = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_node_count"]
+   node_count              = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_node_count"]
   display_name = var.db_system_display_name
   # defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

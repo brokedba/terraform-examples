@@ -4,12 +4,13 @@ variable "tenancy_ocid" {}
 variable "region" {}
 variable "fingerprint" {}
 variable "user_ocid" {}
-variable "public_key_path" {}
+#variable "public_key_path" {}
 variable "private_key_path" {}
-variable "availability_domain" {}
-
+variable "availability_domain" {
+  default = "BahF:CA-TORONTO-1-AD-1"
+    }    # CHANGE ME
 variable "vcn_display_name" {
-  default = "cin-vcn"
+  default = "db-vcn"
 }
 
 variable "vcn_cidr" {
@@ -17,14 +18,20 @@ variable "vcn_cidr" {
 }
 
 variable "vcn_dns_label" {
-  default = "terra-vcn"
+  default = "terravcn"
 }
 # SUBNET INFO
-variable "subnet_dns_label" {
-  default = "terra-subnet"
+variable "subnet_db_dns_label" {
+  default = "dbsubnet"
 }
-variable "subnet_display_name" {
-  default = "terra-sub"
+variable "subnet_db_display_name" {
+  default = "db-sub"
+}
+variable "subnet_app_dns_label" {
+  default = "appsubnet"
+}
+variable "subnet_app_display_name" {
+  default = "app-sub"
 }
 
 variable "subnet_cidr" {
@@ -62,8 +69,15 @@ variable "db_name" {
 }
 
 variable "db_version" {
-  default = "19.9.0.0"
+  default = "19.11.0.0"
 }
+
+/* 
+valid list : 
+11.2.0.4 or 11.2.0.4.201020 or 11.2.0.4.210119 or 11.2.0.4.210420 or 12.1.0.2 or 12.1.0.2.210420 or 12.1.0.2.210720 or 
+12.1.0.2.211019 or 12.2.0.1 or 12.2.0.1.210420 or 12.2.0.1.210720 or 12.2.0.1.211019 or 18.0.0.0 or 18.13.0.0 or 
+18.14.0.0 or 18.16.0.0 or 19.0.0.0 or 19.11.0.0 or 19.12.0.0 or 19.13.0.0 or 21.0.0.0 or 21.3.0.0 or 21.4.0.0.
+*/
 
 variable "db_home_display_name" {
   default = "DBHome19"
@@ -131,7 +145,7 @@ variable "db_recovery_window_in_days" {
 }
 
 variable "ssh_public_key" {
-  default = "~/id_rsa_oci.pub"
+  # default = "~/id_rsa_oci.pub"
 }
 
 

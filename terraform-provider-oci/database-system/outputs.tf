@@ -23,25 +23,25 @@ output "Subnet_CIDR_DB" {
 
 output "hostname" {
   description = " id of created instances. "
-  value       = oci_database_db_system.MYSYSDB.hostname
+  value       = oci_database_db_system.MYDBSYS.hostname
 }
 
 output "private_ip" {
   description = "Private IPs of created instances. "
-  value       = oci_database_db_system.MYSYSDB.private_ip
+  value       = oci_database_db_system.MYDBSYS.private_ip
 }
 
 
 output "DB_STATE" {
-  value = oci_database_db_system.MYSYSDB.state
+  value = oci_database_db_system.MYDBSYS.state
 }
 
 output "DB_Version" {
-  value = oci_database_db_system.MYSYSDB.version
+  value = oci_database_db_system.MYDBSYS.version
 
 }
 output "db_system_options" {
-  value = oci_database_db_system.MYSYSDB.db_system_options
+  value = oci_database_db_system.MYDBSYS.db_system_options
 
 }
        
