@@ -92,7 +92,7 @@ variable "db_system_display_name" {
 }
 
 variable "hostname" {
-  default = "hopsdb-oci"
+  default = "hostdb-oci"
 }
 
 variable "host_user_name" {
