@@ -1,9 +1,10 @@
 
 KVM Libvirt Provider Examples
 This directory contains On-premises Terraform configuration files in order to create a vrtual machine (Centos 7) in a local KVM environment.
-
+![image](https://user-images.githubusercontent.com/29458929/151416418-a4137b5f-3804-4a2b-90ac-d6ff3033e73a.png)
 All you need to know about the deployment examples and steps are in my blog post : 
 - http://www.brokedba.com/2021/12/terraform-for-dummies-part-5-terraform.html 
+
 
 # QEMU environments workaround
 
