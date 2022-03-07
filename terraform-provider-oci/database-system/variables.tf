@@ -69,7 +69,7 @@ variable "db_name" {
 }
 
 variable "db_version" {
-  default = "19.11.0.0"
+  default = "19.14.0.0"
 }
 
 /* 
