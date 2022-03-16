@@ -69,7 +69,7 @@ variable "db_name" {
 }
 
 variable "db_version" {
-  default = "19.14.0.0"
+  default = "21.0.0.0"
 }
 
 /* 
@@ -92,7 +92,7 @@ variable "db_system_display_name" {
 }
 
 variable "hostname" {
-  default = "hostdb-oci"
+  default = "hopsdb-oci"
 }
 
 variable "host_user_name" {
@@ -158,5 +158,35 @@ variable "bucket_name" {
 
 # Dictionary Locals
 locals {
+}
+
+##########################
+#   BASTION SERVICE
+##########################
+
+variable "bastion_cidr_block_allow_list" {
+    default= "0.0.0.0/0"
+}
+
+variable "bastion_name" {
+    default = "BastionMyDB"
+}
+
+variable "session_session_ttl_in_seconds" {
+    default = "10800"
+  
+}
+
+variable "session_target_resource_details_session_type" {
+ default = ""
+ }
+
+variable "bastion_session_type" {
+default = "PORT_FORWARDING"
+
+}
+variable "bastion_session_name" {
+    default = "Session-Mybastion"
+  
 }
 

@@ -44,4 +44,50 @@ output "db_system_options" {
   value = oci_database_db_system.MYDBSYS.db_system_options
 
 }
-       
+
+######### 
+# BASTION
+#########
+
+output "bastion_name" {
+  value = oci_bastion_session.mybastion_session.bastion_name 
+
+}
+
+output "bastion_session_name" {
+  value = oci_bastion_session.mybastion_session.display_name
+
+}
+
+/*output "Bastion_session_key_details" {
+  value = oci_bastion_session.mybastion_session.key_details
+}
+*/
+output "bastion_session_state" {
+  value = oci_bastion_session.mybastion_session.state
+
+}
+
+output "bastion_session_target_resource_details" {
+  value = oci_bastion_session.mybastion_session.target_resource_details
+
+}
+
+output "bastion_session_ssh_connection" {
+  value = oci_bastion_session.mybastion_session.ssh_metadata.command
+
+} 
+
+ 
+/*
+output "bastion_session_target_IP" {
+  value = oci_bastion_session.mybastion_session.target_resource_private_ip_address
+
+}
+
+output "bastion_session_target_port" {
+  value = oci_bastion_session.mybastion_session.target_resource_port 
+
+}
+ 
+*/
