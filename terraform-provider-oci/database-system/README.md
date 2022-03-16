@@ -1,5 +1,10 @@
 
+This deployment includes a DB system  
+- version : 12c
+- Two subnets private subnet for the Db backend and a public subnet for  the front end
+- Bastion Service : which is a remote connection to your private database instance using ssh without needing to create a Host bation
 
+More info in my blog   
 # Known issues
 - The database admin Password should not contain word Oracle or Username(sys).
 - The database version must be one of
