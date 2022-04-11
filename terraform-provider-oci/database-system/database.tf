@@ -1,6 +1,3 @@
-## Copyright © 2020, Oracle and/or its affiliates. 
-## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
-
 
 resource "oci_database_db_system" "MYDBSYS" {
   availability_domain = data.oci_identity_availability_domains.ad1.availability_domains[0].name
