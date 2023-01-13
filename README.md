@@ -5,3 +5,6 @@ please visit my recap blog post for more information
 ![image](https://user-images.githubusercontent.com/29458929/212416485-3e01664e-b8d7-42e0-923c-8bb48575e83d.png)
 
 http://www.brokedba.com/2021/12/my-terraform-labs-2021-cloud-recap.html
+
+# Next Cloud
+- ALIBABA CLOUD (2023)
