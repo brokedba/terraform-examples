@@ -6,5 +6,5 @@ please visit my recap blog post for more information
 
 http://www.brokedba.com/2021/12/my-terraform-labs-2021-cloud-recap.html
 
-# Next Cloud
+# Next Cloud stack
 - ALIBABA CLOUD (2023)
