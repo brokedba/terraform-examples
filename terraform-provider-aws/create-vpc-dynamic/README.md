@@ -25,7 +25,7 @@ To consolidate all sg rules combinations in one main map and still call them usi
  # Locals block  locals {
     sg_mapping = {           #  variable substitution within a variable
       SSH = var.main_sg.sg_ssh
-           WEB = var.main_sg.sg_web
+      WEB = var.main_sg.sg_web
       WIN = var.main_sg.sg_win
   }
 }
