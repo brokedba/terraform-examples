@@ -22,7 +22,41 @@ Therefore the workaround is to set the below variable right before runing terraf
 export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu" 
 
 ```
+## Requirements
 
+| Name | Version |
+|------|---------|
+| <a name="requirement_libvirt"></a> [libvirt](#requirement\_libvirt) | 0.6.2 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_libvirt"></a> [libvirt](#provider\_libvirt) | 0.6.2 0.6.2 |
+| <a name="provider_template"></a> [template](#provider\_template) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [libvirt_cloudinit_disk.commoninit](https://registry.terraform.io/providers/dmacvicar/libvirt/0.6.2/docs/resources/cloudinit_disk) | resource |
+| [libvirt_domain.centovm](https://registry.terraform.io/providers/dmacvicar/libvirt/0.6.2/docs/resources/domain) | resource |
+| [libvirt_domain.ubuntu-vm](https://registry.terraform.io/providers/dmacvicar/libvirt/0.6.2/docs/resources/domain) | resource |
+| [libvirt_volume.centos7-qcow2](https://registry.terraform.io/providers/dmacvicar/libvirt/0.6.2/docs/resources/volume) | resource |
+| [libvirt_volume.ubuntu-disk](https://registry.terraform.io/providers/dmacvicar/libvirt/0.6.2/docs/resources/volume) | resource |
+| [template_file.user_data](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
 # Note
 you can try this in my vagrant build if you don't have a KVM environment to play with . It will create a qemu based vm within a virtualbox vm which makes it even cooler !!
  > GitHub: https://github.com/brokedba/KVM-on-virtualbox
