@@ -1,7 +1,20 @@
 
-    terraform {
-      required_version = ">= 0.12.0"
+terraform {
+    required_version = ">= 0.13"
+     required_providers {
+     oci = {
+      source  = "oracle/oci"
+      }
     }
+    }
+
+provider "oci" {
+  region               = var.region
+  tenancy_ocid         = var.tenancy_ocid
+  user_ocid            = var.user_ocid
+  fingerprint          = var.fingerprint
+  private_key_path     = var.private_key_path
+}
 #################
 # VCN
 #################
@@ -69,22 +82,18 @@ ingress_security_rules {
 ######################
 # Availability Domains
 ######################
-    data "oci_identity_availability_domains" "ad1" {
-      compartment_id = var.compartment_ocid
+    data "oci_identity_availability_domains" "ads" {
+      compartment_id = var.tenancy_ocid
     }  
 ######################
 # Subnet
 ######################
 
     resource "oci_core_subnet" "terrasub" {
-      count               = length(data.oci_identity_availability_domains.ad1.availability_domains)
-      availability_domain = lookup(data.oci_identity_availability_domains.ad1.availability_domains[count.index], "name")
-     # cidr_block          = cidrsubnet(var.vcn_cidr, ceil(log(len527gth(data.oci_identity_availability_domains.ad1.availability_domains) * 2, 2)), count.index)
-    #      display_name        = "Default Subnet ${lookup(data.oci_identity_availability_domains.ad1.availability_domains[count.index], "name")}"
       cidr_block     = var.subnet_cidr 
       display_name   = var.subnet_display_name
       prohibit_public_ip_on_vnic  = false
-      dns_label                   = "${var.subnet_dns_label}${count.index + 1}"
+      dns_label                   = var.subnet_dns_label
       compartment_id              = var.compartment_ocid
       vcn_id                      = oci_core_vcn.vcnterra.id
       route_table_id              = oci_core_default_route_table.rt.id
@@ -92,5 +101,3 @@ ingress_security_rules {
       dhcp_options_id             = oci_core_vcn.vcnterra.default_dhcp_options_id
       #security_list_ids   = ["${oci_core_vcn.vcnterra.default_security_list_id}"]
     }
- 
-    
