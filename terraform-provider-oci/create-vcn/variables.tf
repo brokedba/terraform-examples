@@ -1,7 +1,15 @@
 
-    variable "compartment_ocid" {}
-    variable "tenancy_ocid" {}
-    variable "region" {}
+variable "compartment_ocid" {}
+variable "tenancy_ocid" {}
+variable "user_ocid" {}
+variable "fingerprint" {}
+variable "private_key_path" {}
+variable "region" {}
+
+variable "availability_domain_name" {
+  default     = ""
+  description = "Availability Domain"
+}
 
     variable "vcn_display_name" {
       default = "Terravcn"
@@ -25,8 +33,3 @@
     variable "subnet_cidr"{
       default = "192.168.78.0/24"
       }  
-    provider "oci" {
-      tenancy_ocid     = var.tenancy_ocid
-      region           = var.region
-    }
-  
