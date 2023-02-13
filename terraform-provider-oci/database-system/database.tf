@@ -29,8 +29,9 @@ resource "oci_database_db_system" "MYDBSYS" {
   ssh_public_keys         = [file(var.ssh_public_key),] 
   hostname                = var.hostname
   data_storage_size_in_gb = var.data_storage_size_in_gb
-   node_count              = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_node_count"]
+  node_count              = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_node_count"]
   display_name = var.db_system_display_name
+  cpu_core_count = var.db_system_cpu_core_count
   # defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
