@@ -6,7 +6,7 @@ In order to deploy this terraform configuration you must:
 $ . env-vars
 ```
 or 
-2. adaptterrafomr.tfvars 
+2. adapt terrafomr.tfvars 
 
 ## Requirements
 
