@@ -11,4 +11,4 @@ region = "ca-toronto-1"                       # CHANGE ME
 availability_domain = "CA-TORONTO-1-AD-1"     # CHANGE ME
 
 # Database Admin Password
-db_admin_password = "DBsystem2020##" 
+db_admin_password = "DBwelcome2022##" 
