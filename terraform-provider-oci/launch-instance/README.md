@@ -1,3 +1,12 @@
+
+## Getting started 
+In order to deploy this terraform configuration you must:
+1. adapt env-vars and source it 
+```
+$ . env-vars
+```
+or 
+2. adapt terrafomr.tfvars 
 ## Requirements
 
 | Name | Version |
