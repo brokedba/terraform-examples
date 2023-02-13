@@ -26,7 +26,7 @@ resource "oci_database_db_system" "MYDBSYS" {
   license_model           = var.license_model
   subnet_id               = oci_core_subnet.terraDB.id
   private_ip              = var.db_system_private_ip
-  ssh_public_keys         = ["${var.ssh_public_key}"] # == "" ? [tls_private_key.public_private_key_pair.public_key_openssh] : [tls_private_key.public_private_key_pair.public_key_openssh, var.ssh_public_key]
+  ssh_public_keys         = [file(var.ssh_public_key),] 
   hostname                = var.hostname
   data_storage_size_in_gb = var.data_storage_size_in_gb
    node_count              = data.oci_database_db_system_shapes.db_system_shapes.db_system_shapes[0]["minimum_node_count"]
