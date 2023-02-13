@@ -127,6 +127,10 @@ variable "node_count" {
   default = "1"
 }
 
+variable "db_system_cpu_core_count" {
+default = "2"
+}
+
 variable "data_storage_percentage" {
   default = "40"
 }
