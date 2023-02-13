@@ -50,7 +50,7 @@ provider "oci" {
 #################
 
 variable "db_system_shape" {
-  default = "VM.Standard2.4"
+  default = "VM.Standard.E4.Flex"  #"VM.Standard2.4"
 }
 
 variable "db_edition" {
