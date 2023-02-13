@@ -28,7 +28,7 @@ resource "oci_bastion_session" "mybastion_session" {
     bastion_id = oci_bastion_bastion.mybastion.id
     key_details {
         #Required
-        public_key_content = var.ssh_public_key
+        public_key_content = file(var.ssh_public_key)
     }
     target_resource_details {
         #Required
