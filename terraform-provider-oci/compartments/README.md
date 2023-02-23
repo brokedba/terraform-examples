@@ -6,6 +6,17 @@
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.3 |
 | <a name="requirement_oci"></a> [oci](#requirement\_oci) | 4.105.0 |
 
+## Geting started
+- Before runing terraform init.Please adjust the terraform.tfvar.template  and Rename it to terraform.tfvars see below 
+```
+vi terraform.tfvar
+user_ocid        = "ocid1.user.oc1.."           #CHANGE ME
+fingerprint      = "1c.."                       #CHANGE ME
+private_key_path = "~/.oci/oci_api_key.pem"     #CHANGE ME
+tenancy_ocid     = "ocid1.tenancy.oc1.."        #CHANGE ME
+region           = "us-ashburn-1"               #CHANGE ME
+```
+
 ## Providers
 
 | Name | Version |
