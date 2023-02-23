@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"level_1_sub_compartments","Source":"./modules/iam-compartment","Dir":"./modules/iam-compartment"},{"Key":"level_2_sub_compartments","Source":"./modules/iam-compartment","Dir":"./modules/iam-compartment"}]}
