@@ -17,6 +17,27 @@ tenancy_ocid     = "ocid1.tenancy.oc1.."        #CHANGE ME
 region           = "us-ashburn-1"               #CHANGE ME
 ```
 
+## Note
+ This stack uses a local Module to create 2 levels of subcompartments as shown in the below local section 
+| Compartment      | level |
+-------------------|--------
+| Main (Enclosing) compartment | 1|
+|Level1 Subcompartments |4|
+|Level2 Subcompartments |4|
+```
+l1_subcomp = {  #Level 1 subcompartment     || Parent compartment => var.main_compartment_name
+      comp-shared                = "for shared services like AD, Commvault,Monitoring"  
+      comp-network               = "for all FW, VCNs and LBRs"
+      comp-security              = "for Security related resources like Vaults, keys"
+      (var.app_compartment_name) = "Parent compartment for all application resources"
+    },
+    l2_subcomp = { #Level 2 subcompartments  || Parent compartment => L1 var.app_compartment_name
+      "${var.app_compartment_name}-prod"  = " production VMs"
+      "${var.app_compartment_name}-nprod" = "non-production VMs"
+      "${var.app_compartment_name}-dr"    = "DR VMs"
+      "${var.app_compartment_name}-db"    = "Database instances and resources"
+    }
+```
 ## Providers
 
 | Name | Version |
