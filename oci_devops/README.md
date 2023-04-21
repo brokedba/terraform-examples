@@ -31,18 +31,8 @@ OCI_PRIMARY_SOURCE_SOURCE_BRANCH_NAME| Primary build source branch used in the c
 
 Reference - https://docs.oracle.com/en-us/iaas/Content/devops/using/build_specs.htm
 
-### Procedure to use the sample.
 
- 
-- Create a DevOps project - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_project.htm
-- Create an OCI Code repo - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_repo.htm
-- Create a build pipeline - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_buildpipeline.htm
-- Push these samples to the OCI Code repo.
-- Add a `Managed Build stage` to the build pipeline - https://docs.oracle.com/en-us/iaas/Content/devops/using/add_buildstage.htm
-- Run the build pipeline and verify the values.
-- You may use these values by defining an external repo (Github/Gitlab or Bitbucket) and validate the executions too - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
- ----
-This is a fork with multiple TF exmaple of various CSP .
+## This is a fork with multiple TF exmaple of various CSP .
 
 Add - ons 
 
@@ -102,3 +92,14 @@ $ oci devops build-run create --build-pipeline-id ocid1.devopsbuildpipeline.oc1.
 
 ![image](https://user-images.githubusercontent.com/29458929/233540245-29e259fe-6dab-4ca0-a55e-902db3fe2747.png)
 
+## OCI Devops Resources.
+
+ 
+- Create a DevOps project - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_project.htm
+- Create an OCI Code repo - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_repo.htm
+- Create a build pipeline - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_buildpipeline.htm
+- Push these samples to the OCI Code repo.
+- Add a `Managed Build stage` to the build pipeline - https://docs.oracle.com/en-us/iaas/Content/devops/using/add_buildstage.htm
+- Run the build pipeline and verify the values.
+- You may use these values by defining an external repo (Github/Gitlab or Bitbucket) and validate the executions too - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
+ ----
