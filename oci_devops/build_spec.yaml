@@ -48,8 +48,8 @@ steps:
         timeoutInSeconds: 40
         runAs: root
 
-outputArtifacts:
-  - name: command_spec
-    type: BINARY
-    location: ${OCI_PRIMARY_SOURCE_DIR}/command_spec.yaml
+# outputArtifacts:
+#   - name: command_spec
+#     type: BINARY
+#     location: ${OCI_PRIMARY_SOURCE_DIR}/command_spec.yaml
   
