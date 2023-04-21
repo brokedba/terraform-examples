@@ -6,12 +6,9 @@ shell: bash
 env:
   # these are local variables to the build config
   variables:
-    code_repo_name: "whatever"
-  
-  
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
-    vaultVariables:
+  vaultVariables:
   #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
     #  aws_access_key_id: ocid1.vaultsecret.oc1.iad.xxxx
     #  aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
@@ -20,8 +17,8 @@ env:
   # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
   exportedVariables:
-    OBJECT_BUCKET_NAMESPACE_NAME
-    OBJECT_BUCKET_NAME
+    - OBJECT_BUCKET_NAMESPACE_NAME
+    - OBJECT_BUCKET_NAME
 
 
 steps:
