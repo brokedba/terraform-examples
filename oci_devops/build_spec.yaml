@@ -1,0 +1,66 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    code_repo_name: "whatever"
+  
+  
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+    vaultVariables:
+  #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
+    #  aws_access_key_id: ocid1.vaultsecret.oc1.iad.xxxx
+    #  aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
+    #  ACCESS_KEY: "[ACCESS_KEY_VAULT_SECRET_OCID]"
+    #  SECRET_KEY: "[SECRET_KEY_VAULT_SECRET_OCID]"
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+   #To share variable to futher stages : EXAMPLE
+  #  - BUILDRUN_HASH
+  #  - BUILDRUN_HASH
+  #  - STATIC_IMAGE_TAG
+  #  - OBJECT_BUCKET_NAME
+  #  - OBJECT_NAMESPACE
+
+steps:
+  - type: Command
+    name: "Display all folders"
+    timeoutInSeconds: 40
+    command: |
+      ls -ltr ${OCI_PRIMARY_SOURCE_DIR}
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Into a specific resource path"
+    command: |
+      echo "In to Path - ${TF_PROVIDER_PATH}/${TF_STACK_DIR}"
+      ls -ltr ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+
+# steps:
+#     - type: Command
+#         name: Init terraform
+#         command: terraform init -no-color -backend-config="access_key=${ACCESS_KEY}" -backend-config="secret_key=${SECRET_KEY}"
+#     - type: Command
+#         name: Select workspace
+#         command: terraform workspace select ${TARGET_ENV} -no-color
+#     - type: Command
+#         name: Refresh terraform
+#         command: ./runtf.sh refresh -no-color
+#     - type: Command
+#         name: Fix git dates
+#         command: ./fix_git.sh
+#     - type: Command
+#         name: Apply terraform
+#         command: ./runtf.sh apply -no-color -auto-approve
