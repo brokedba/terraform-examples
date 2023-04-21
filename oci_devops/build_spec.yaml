@@ -38,7 +38,10 @@ steps:
     name: "Into a specific resource path"
     command: |
       echo "In to Path - ${TF_PROVIDER_PATH}/${TF_STACK_DIR}"
-      ls -ltr ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
+      cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
+      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto --prefix "/terraform_build"
+      
+
     onFailure:
       - type: Command
         command: |
@@ -46,21 +49,3 @@ steps:
           echo "Failure successfully handled"
         timeoutInSeconds: 40
         runAs: root
-
-
-# steps:
-#     - type: Command
-#         name: Init terraform
-#         command: terraform init -no-color -backend-config="access_key=${ACCESS_KEY}" -backend-config="secret_key=${SECRET_KEY}"
-#     - type: Command
-#         name: Select workspace
-#         command: terraform workspace select ${TARGET_ENV} -no-color
-#     - type: Command
-#         name: Refresh terraform
-#         command: ./runtf.sh refresh -no-color
-#     - type: Command
-#         name: Fix git dates
-#         command: ./fix_git.sh
-#     - type: Command
-#         name: Apply terraform
-#         command: ./runtf.sh apply -no-color -auto-approve
