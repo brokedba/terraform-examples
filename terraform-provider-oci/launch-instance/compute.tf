@@ -42,7 +42,7 @@
         }
 
         metadata = {
-          ssh_authorized_keys = file("../../.ssh/id_rsa.pub")
+          ssh_authorized_keys = file(var.ssh_public_key)   #file("../../.ssh/id_rsa.pub")
           user_data = base64encode(file("./cloud-init/vm.cloud-config"))
         }
 
@@ -69,7 +69,7 @@
 
       resource "oci_core_volume_attachment" "terra_attach" {
         attachment_type = var.attachment_type
-        compartment_id  = var.compartment_ocid
+       # compartment_id  = var.compartment_ocid  deprecated attribute
         instance_id     = oci_core_instance.terra_inst.id
         volume_id       = oci_core_volume.terra_vol.id
         use_chap        = var.use_chap  # true

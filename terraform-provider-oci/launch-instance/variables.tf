@@ -1,9 +1,36 @@
+#########################################################
+# Author Brokedba https://twitter.com/BrokeDba
+#########################################################
+#Variables declared in this file must be declared in the marketplace.yaml
+terraform {
+  required_providers {
+    oci = {
+      source  = "oracle/oci"
+      version = "4.105.0"
+    }
+  }
+}
 
-    variable "compartment_ocid" {}
-    variable "tenancy_ocid" {}
-    variable "region" {}
-
-#VCN INFO    
+provider "oci" {
+ tenancy_ocid = var.tenancy_ocid
+ region       = var.region
+ fingerprint    = var.fingerprint
+ user_ocid      = var.user_ocid
+ private_key_path = var.private_key_path
+}
+ 
+############################
+#  Hidden Variable Group   #
+############################
+variable "tenancy_ocid" {}
+variable "region" {}
+variable "private_key_path" {}
+variable "fingerprint" {}
+variable "user_ocid" {}
+variable "compartment_ocid" {}
+##############################
+#         VCN INFO           #  
+##############################
     variable "vcn_display_name" {
       default = "Terravcn"
     }
@@ -96,8 +123,3 @@
       variable "instance_ocpus" {
       default = 1
       }        
-    provider "oci" {
-      tenancy_ocid     = var.tenancy_ocid
-      region           = var.region
-    }
-  
