@@ -20,12 +20,9 @@ env:
   # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
   exportedVariables:
-   #To share variable to futher stages : EXAMPLE
-  #  - BUILDRUN_HASH
-  #  - BUILDRUN_HASH
-  #  - STATIC_IMAGE_TAG
-  #  - OBJECT_BUCKET_NAME
-  #  - OBJECT_NAMESPACE
+    OBJECT_BUCKET_NAMESPACE_NAME
+    OBJECT_BUCKET_NAME
+
 
 steps:
   - type: Command
@@ -38,8 +35,12 @@ steps:
     name: "Into a specific resource path"
     command: |
       echo "In to Path - ${TF_PROVIDER_PATH}/${TF_STACK_DIR}"
+      export OBJECT_BUCKET_NAMESPACE_NAME=${BUCKET_NAMESPACE_NAME}
+      export OBJECT_BUCKET_NAME=${BUCKET_NAME}
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
-      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto --prefix "/terraform_build"
+      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto 
+  
+  #--prefix "/terraform_build"
       
 
     onFailure:
@@ -49,3 +50,9 @@ steps:
           echo "Failure successfully handled"
         timeoutInSeconds: 40
         runAs: root
+
+outputArtifacts:
+  - name: command_spec
+    type: BINARY
+    location: ${OCI_PRIMARY_SOURCE_DIR}/command_spec.yaml
+  
