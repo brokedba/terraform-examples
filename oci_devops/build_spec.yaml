@@ -37,6 +37,7 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       echo "remove original provider section"
       sed -i -e '14,20d' variables.tf
+      sed -i '/^variable "private_key_path"/d' variables.tf
       echo "add new provider based on the principal authentication"
       cat <<EOF >provider.tf
       provider "oci" {
@@ -70,6 +71,10 @@ steps:
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       echo " check the execution plan"
+      echo ${TF_VAR_private_key}>oci_api_key.pem
+      echo 'cat oci_api_key.pem'
+      cat oci_key.pem
+      export TF_VAR_private_key_path='./oci_key.pem'
       terraform plan    
     onFailure:
       - type: Command
