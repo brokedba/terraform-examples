@@ -65,12 +65,12 @@ steps:
       cat provider.tf 
       terraform validate
   - type: Command
-  timeoutInSeconds: 600
-  name: "terraform plan"
-  command: |
-    cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
-    echo " check the execution plan"
-    terraform plan    
+    timeoutInSeconds: 600
+    name: "terraform plan"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
+      echo " check the execution plan"
+      terraform plan    
     onFailure:
       - type: Command
         command: |
