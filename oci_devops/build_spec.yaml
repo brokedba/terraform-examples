@@ -41,7 +41,7 @@ steps:
       cat <<EOF >provider.tf
       provider "oci" {
       auth = "ResourcePrincipal"
-      region = "\${OCI_REGION}"
+      region = "${OCI_REGION}"
       }
       EOF
       echo "upload into a bucket"
@@ -62,6 +62,7 @@ steps:
     name: "terraform validate"
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
+       cat provider.tf 
       cat provider.tf | envsubst >provider.tf_tmp
       cp provider.tf_tmp provider.tf 
       echo check provider.tf
