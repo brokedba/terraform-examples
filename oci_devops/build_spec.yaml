@@ -46,15 +46,12 @@ steps:
       EOF
       echo "upload into a bucket"
       oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto --object-prefix "terraform_build/"
- 
-
   - type: Command
-  timeoutInSeconds: 600
-  name: "terraform init"
-  command: |
-    echo "pwd into ${TF_STACK_DIR}"     
-    pwd
-
+    timeoutInSeconds: 600
+    name: "terraform init"
+    command: |
+      echo "pwd into ${TF_STACK_DIR}"     
+      pwd
 
     onFailure:
       - type: Command
