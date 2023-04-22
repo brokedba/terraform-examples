@@ -57,7 +57,8 @@ steps:
       terraform fmt
       export TF_VAR_oci_region="${OCI_REGION}"
       echo "TF_VAR_oci_region  => ${TF_VAR_oci_region}"
-      echo "Real oci_region  => ${OCI_REGION}"
+      cat provider.tf | envsubst >provider.tf_tmp
+      cp provider.tf_tmp provider.tf 
       terraform validate
 
     onFailure:
