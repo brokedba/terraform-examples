@@ -41,7 +41,7 @@ steps:
       cat <<EOF >provider.tf
       provider "oci" {
       auth = "ResourcePrincipal"
-      region = "\${var.oci_region}"
+      region = "\${OCI_REGION}"
       }
       EOF
       echo "upload into a bucket"
