@@ -34,8 +34,7 @@ steps:
       echo "In to Path - ${TF_PROVIDER_PATH}/${TF_STACK_DIR}"
       export OBJECT_BUCKET_NAMESPACE_NAME=${BUCKET_NAMESPACE_NAME}
       export OBJECT_BUCKET_NAME=${BUCKET_NAME}
-      cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}    .
-      cd ${TF_STACK_DIR}
+      cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       echo "remove original provider section"
       sed -i -e '14,20d' variables.tf
       echo "add new provider based on the principal authentication"
@@ -47,6 +46,8 @@ steps:
       EOF
       echo "upload into a bucket"
       oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto --object-prefix "terraform_build/"
+ #     cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}    .
+
   - type: Command
   timeoutInSeconds: 600
   name: "terraform init"
