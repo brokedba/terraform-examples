@@ -56,8 +56,6 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       terraform init 
       terraform fmt
-      export TF_VAR_oci_region="${OCI_REGION}"
-      echo "TF_VAR_oci_region  => ${TF_VAR_oci_region}"
   - type: Command
     timeoutInSeconds: 600
     name: "terraform validate"
@@ -71,9 +69,10 @@ steps:
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       echo " check the execution plan"
-      echo ${TF_VAR_private_key}>oci_api_key.pem
-      echo 'cat oci_api_key.pem'
-      cat oci_key.pem
+#     echo ${TF_VAR_private_key}>oci_api_key.pem
+#      echo 'cat oci_api_key.pem'
+#      cat oci_key.pem
+      export TF_VAR_region="${OCI_REGION}"
       export TF_VAR_private_key_path='./oci_key.pem'
       terraform plan    
     onFailure:
