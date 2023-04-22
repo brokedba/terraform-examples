@@ -29,22 +29,31 @@ steps:
       ls -ltr ${OCI_PRIMARY_SOURCE_DIR}
   - type: Command
     timeoutInSeconds: 600
-    name: "Into a specific resource path"
+    name: "load and modify the original stack and load intp storage Bucket"
     command: |
       echo "In to Path - ${TF_PROVIDER_PATH}/${TF_STACK_DIR}"
       export OBJECT_BUCKET_NAMESPACE_NAME=${BUCKET_NAMESPACE_NAME}
       export OBJECT_BUCKET_NAME=${BUCKET_NAME}
       cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}    .
       cd ${TF_STACK_DIR}
+      echo "remove original provider section"
       sed -i -e '14,20d' variables.tf
+      echo "add new provider based on the principal authentication"
       cat <<EOF >provider.tf
       provider "oci" {
       auth = "ResourcePrincipal"
       region = "\${var.oci_region}"
       }
       EOF
+      echo "upload into a bucket"
       oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto --object-prefix "terraform_build/"
-      
+  - type: Command
+  timeoutInSeconds: 600
+  name: "terraform init"
+  command: |
+    echo "pwd into ${TF_STACK_DIR}"     
+    pwd
+
 
     onFailure:
       - type: Command
