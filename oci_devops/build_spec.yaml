@@ -55,6 +55,7 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       terraform init 
       terraform fmt
+      export TF_VAR_region=${OCI_REGION}
       terraform validate
 
     onFailure:
