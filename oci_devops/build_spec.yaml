@@ -8,6 +8,7 @@ env:
   variables:
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
+    TF_VAR_ssh_public_key: ${ssh_public_key_1}${ssh_public_key_2}
   vaultVariables:
   #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
     #  aws_access_key_id: ocid1.vaultsecret.oc1.iad.xxxx
@@ -19,7 +20,7 @@ env:
   exportedVariables:
     - OBJECT_BUCKET_NAMESPACE_NAME
     - OBJECT_BUCKET_NAME
-#    - TF_VAR_ssh_public_key
+    - TF_VAR_ssh_public_key
 #     cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}    .
 
 steps:
@@ -30,7 +31,7 @@ steps:
       ls -ltr ${OCI_PRIMARY_SOURCE_DIR}
   - type: Command
     timeoutInSeconds: 600
-    name: "load and modify the original stack and load intp storage Bucket"
+    name: "load and modify the original stack and load into storage Bucket"
     command: |
       echo "In to Path - ${TF_PROVIDER_PATH}/${TF_STACK_DIR}"
       export OBJECT_BUCKET_NAMESPACE_NAME=${BUCKET_NAMESPACE_NAME}
