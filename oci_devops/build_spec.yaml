@@ -84,8 +84,8 @@ steps:
         timeoutInSeconds: 40
         runAs: root
 
-outputArtifacts:
-  - name: terraform_plan
-    type: BINARY
-    location: ${OCI_PRIMARY_SOURCE_DIR}/instance.tfplan 
+# outputArtifacts:
+#   - name: terraform_plan
+#     type: BINARY
+#     location: ${OCI_PRIMARY_SOURCE_DIR}/instance.tfplan 
   
