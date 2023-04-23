@@ -79,7 +79,7 @@ steps:
       export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       export TF_VAR_private_key_path='./oci_key.pem'
-      terraform plan  -out=instance.tfplan   
+      terraform plan  -out=${OCI_PRIMARY_SOURCE_DIR}/instance.tfplan   
     onFailure:
       - type: Command
         command: |
