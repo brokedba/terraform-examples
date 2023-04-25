@@ -42,7 +42,7 @@ steps:
     command: |
       cd /tmp/terraform_build
       echo "Deploying the the webserver"
-      terraform apply instance.tfplan --auto-approve
+      terraform apply --auto-approve instance.tfplan 
       oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --content-type auto --name "terraform_build/terraform.tfstate"
       sleep 2m
   - type: Command
