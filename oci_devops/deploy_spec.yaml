@@ -1,0 +1,70 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+  vaultVariables:
+  exportedVariables:
+    - OBJECT_BUCKET_NAMESPACE_NAME
+    - OBJECT_BUCKET_NAME
+    - TF_VAR_region
+
+steps:
+  - type: Command
+    name: "Terraform Setup"
+    timeoutInSeconds: 40
+    command: |
+      oci os object bulk-download -ns ${OBJECT_BUCKET_NAMESPACE_NAME} -bn ${OBJECT_BUCKET_NAME} --download-dir /tmp/   --prefix "terraform_build/"
+      ls -ltr /tmp/terraform_build
+      cd /tmp/terraform_build
+      terraform init
+      terraform fmt
+
+  - type: Command
+    timeoutInSeconds: 600
+    name: "terraform plan"
+    command: |
+      echo " check the execution plan"
+      cd /tmp/terraform_build
+      export TF_VAR_region="${OCI_REGION}"
+      export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
+      echo "ssh public key => ${TF_VAR_ssh_public_key} "
+      terraform validate
+      terraform plan  -out=instance.tfplan   
+      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file instance.tfplan --content-type auto --name "terraform_build/instance.tfplan"
+  - type: Command
+    timeoutInSeconds: 600
+    name: "terraform apply"
+    command: |
+      cd /tmp/terraform_build
+      echo "Deploying the the webserver"
+      terraform apply instance.tfplan --auto-approve
+      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --content-type auto --name "terraform_build/terraform.tfstate"
+      sleep 2m
+  - type: Command
+    timeoutInSeconds: 600
+    name: "terraform destroy"
+    command: |
+      cd /tmp/terraform_build
+      cat terraform.tfstate | wc -l
+      echo " move local statefile"
+      mv  terraform.tfstate terraform.tfstate.old
+      echo " downloading remote statefile"
+      oci os object get -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --name "terraform_build/terraform.tfstate" 
+      echo "number of lines after download"
+      cat terraform.tfstate | wc -l
+      echo "final destroy command"
+      terraform destroy   --auto-approve
+
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+  
