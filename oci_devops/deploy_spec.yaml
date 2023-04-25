@@ -35,7 +35,7 @@ steps:
       terraform validate
       rm -f  instance.tfplan
       terraform plan -out=instance.tfplan   
-      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file instance.tfplan --content-type auto --name "terraform_build/instance.tfplan"
+      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file instance.tfplan --content-type auto --name "terraform_build/instance.tfplan" --force
   - type: Command
     timeoutInSeconds: 600
     name: "terraform apply"
@@ -43,7 +43,7 @@ steps:
       cd /tmp/terraform_build
       echo "Deploying the webserver"
       terraform apply --auto-approve instance.tfplan
-      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --content-type auto --name "terraform_build/terraform.tfstate"
+      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --content-type auto --name "terraform_build/terraform.tfstate" --force
       sleep 2m
   - type: Command
     timeoutInSeconds: 600
