@@ -57,6 +57,7 @@ steps:
       oci os object get -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --name "terraform_build/terraform.tfstate" 
       echo "number of lines after download"
       cat terraform.tfstate | wc -l
+      export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
       echo "final destroy command"
       terraform destroy   --auto-approve
 
