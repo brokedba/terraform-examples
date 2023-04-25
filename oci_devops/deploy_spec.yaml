@@ -33,16 +33,16 @@ steps:
       export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       terraform validate
-      rm instance.tfplan
-      terraform plan  -out=instance.tfplan   
+      rm -f  instance.tfplan
+      terraform plan -out=instance.tfplan   
       oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file instance.tfplan --content-type auto --name "terraform_build/instance.tfplan"
   - type: Command
     timeoutInSeconds: 600
     name: "terraform apply"
     command: |
       cd /tmp/terraform_build
-      echo "Deploying the the webserver"
-      terraform apply --auto-approve instance.tfplan 
+      echo "Deploying the webserver"
+      terraform apply --auto-approve instance.tfplan
       oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file terraform.tfstate --content-type auto --name "terraform_build/terraform.tfstate"
       sleep 2m
   - type: Command
