@@ -69,7 +69,7 @@ variable "compartment_ocid" {}
         default = "50"
       }
       variable "shape" {
-        default = "VM.Standard.E2.1.Micro"
+        default = "VM.Standard.E4.Flex" #"VM.Standard.E2.1.Micro"
       }
       variable "instance_image_ocid" {
         type = map
