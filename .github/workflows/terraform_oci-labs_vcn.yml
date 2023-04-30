@@ -15,7 +15,7 @@ env:
   working_dir: ${GITHUB_WORKSPACE/terraform-provider-oci/create-vcn}
 defaults:
  run:
-  working-directory: $GITHUB_WORKSPACE/terraform-provider-oci/create-vcn/
+  working-directory: $GITHUB_WORKSPACE/$TF_STACK_DIR
  
 # permissions:
 #  contents: read
@@ -31,7 +31,7 @@ jobs:
         shell: bash
 
     steps:
-    # - run: echo $GITHUB_WORKSPACE
+    - run: echo $GITHUB_WORKSPACE/$TF_STACK_DIR
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
@@ -50,6 +50,6 @@ jobs:
     - name: Terraform Init
       run: |
         echo ' the current directort is  '
-        cd $GITHUB_WORKSPACE/terraform-provider-oci/create-vcn/
+        cd $GITHUB_WORKSPACE/$TF_STACK_DIR
         terraform init
         terraform -v 
