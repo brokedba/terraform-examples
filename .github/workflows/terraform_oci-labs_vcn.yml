@@ -1,0 +1,53 @@
+name: 'Terraform_oci_vcn'
+
+on:
+  push:
+    branches: [ "git_actions" ]
+    paths:
+      - 'terraform-provider-oci/create-vcn/**.tf'   
+env:
+  DAY_OF_WEEK: Monday
+  TF_VAR_tenancy_ocid: ${{ secrets.TENANCY_OCID }}  
+  TF_VAR_user_ocid: ${{ secrets.USER_OCID }}
+  TF_VAR_private_key: ${{ secrets.PRIVATE_KEY }}
+  TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+  TF_VAR_compartment_ocid: ${{ secrets.USER_OCID }}
+  TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
+defaults:
+ run:
+  working-directory: ./terraform-provider-oci/create-vcn
+ 
+# permissions:
+#  contents: read
+
+jobs:
+  terraform_setup:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: oci-labs
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+    - id: checkout
+      uses: actions/checkout@v3
+      
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.3
+        terraform_wrapper: false
+    #   cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: |
+        echo ' the current directort is  $PWD '
+        terraform init
+        terraform -v 
