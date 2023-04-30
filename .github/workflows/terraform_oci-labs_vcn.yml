@@ -33,7 +33,6 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-    - id: checkout
       uses: actions/checkout@v3
       
 
