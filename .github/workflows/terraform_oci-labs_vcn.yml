@@ -50,6 +50,6 @@ jobs:
     - name: Terraform Init
       run: |
         echo ' the current directort is  '
-        cd $working_dir
+        cd $GITHUB_WORKSPACE/terraform-provider-oci/create-vcn/
         terraform init
         terraform -v 
