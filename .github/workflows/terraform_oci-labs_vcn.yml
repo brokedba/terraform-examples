@@ -12,7 +12,9 @@ env:
   TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
   TF_VAR_compartment_ocid: ${{ secrets.USER_OCID }}
   TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
+  STACK_DIR: ${{env.TF_STACK_DIR}}
   working_dir: ${GITHUB_WORKSPACE/terraform-provider-oci/create-vcn}
+  
 defaults:
  run:
   working-directory: $GITHUB_WORKSPACE/$TF_STACK_DIR
