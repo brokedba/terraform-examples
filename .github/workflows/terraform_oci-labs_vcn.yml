@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "git_actions" ]
     paths:
-      - 'terraform-provider-oci/**'   
+      - 'terraform-provider-oci/create-vcn/**'   
 env:
   TF_VAR_tenancy_ocid: ${{ secrets.TENANCY_OCID }}  
   TF_VAR_user_ocid: ${{ secrets.USER_OCID }}
@@ -49,6 +49,7 @@ jobs:
     - name: Terraform Init
       run: |
         working-directory: ./terraform-provider-oci/create-vcn
-        echo ' the current directort is  $PWD '
+        echo ' the current directort is  '
+        pwd
         terraform init
         terraform -v 
