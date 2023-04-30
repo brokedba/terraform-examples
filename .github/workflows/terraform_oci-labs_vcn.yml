@@ -13,7 +13,7 @@ env:
   TF_VAR_compartment_ocid: ${{ secrets.USER_OCID }}
   TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
-  working_dir: '${{ vars.GITHUB_WORKSPACE }}/${{ vars.STACK_DIR }}'
+  WORKING_DIR: '${{ vars.GITHUB_WORKSPACE }}/${{ vars.STACK_DIR }}'
   
 defaults:
  run:
@@ -52,7 +52,7 @@ jobs:
     - name: Terraform Init
       run: |
         echo ' the current directort is  '
-        echo  working dir:  $working_dir
+        echo  working dir:  $WORKING_DIR
         echo  git.stack_dir: $GITHUB_WORKSPACE/$STACK_DIR
         cd $GITHUB_WORKSPACE/terraform-provider-oci/create-vcn
         terraform init
