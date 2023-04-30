@@ -15,7 +15,7 @@ provider "oci" {
   fingerprint          = var.fingerprint
   private_key     = var.private_key
 }
-#################
+##################
 # VCN
 #################
     
