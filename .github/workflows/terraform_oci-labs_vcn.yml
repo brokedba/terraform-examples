@@ -13,9 +13,9 @@ env:
   TF_VAR_compartment_ocid: ${{ secrets.USER_OCID }}
   TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
   
-#defaults:
-#  run:
-#  working-directory: ./terraform-provider-oci/create-vcn
+defaults:
+ run:
+  working-directory: $GITHUB_WORKSPACE/terraform-provider-oci/create-vcn
  
 # permissions:
 #  contents: read
@@ -31,7 +31,7 @@ jobs:
         shell: bash
 
     steps:
-    - run: echo $GITHUB_WORKSPACE
+    # - run: echo $GITHUB_WORKSPACE
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
@@ -49,8 +49,7 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
-        working-directory: ./terraform-provider-oci/create-vcn
         echo ' the current directort is  '
-        pwd
+        ls 
         terraform init
         terraform -v 
