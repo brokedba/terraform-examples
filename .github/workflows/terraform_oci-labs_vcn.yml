@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "git_actions" ]
     paths:
-      - './terraform-provider-oci/create-vcn/*.tf'   
+      - 'terraform-provider-oci/create-vcn/*.tf'   
 env:
   DAY_OF_WEEK: Monday
   TF_VAR_tenancy_ocid: ${{ secrets.TENANCY_OCID }}  
@@ -31,6 +31,7 @@ jobs:
         shell: bash
 
     steps:
+    - run: 'echo "No build required"'
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
