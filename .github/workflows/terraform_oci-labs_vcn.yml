@@ -53,7 +53,7 @@ jobs:
       run: |
         echo ' the current directort is  '
         echo  working dir:  $WORKING_DIR
-        echo  git.stack_dir: $GITHUB_WORKSPACE/$STACK_DIR
+        echo  git.stack_dir: $GITHUB_WORKSPACE/$TF_STACK_DIR
         cd $GITHUB_WORKSPACE/terraform-provider-oci/create-vcn
         terraform init
         terraform -v 
