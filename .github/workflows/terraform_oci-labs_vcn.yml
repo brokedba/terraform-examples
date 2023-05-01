@@ -66,8 +66,11 @@ jobs:
         # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
         terraform -v 
-  
     - name: Terraform format
+      run: |
+        echo  ***** format the Terraform configuration in $STACK_DIR  ******
+        terraform fmt  
+    - name: Terraform Validate
       run: |
         echo  ***** Validate the Terraform configuration in $STACK_DIR  ******
         terraform validate
