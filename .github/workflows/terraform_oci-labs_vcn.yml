@@ -55,6 +55,8 @@ jobs:
       with:
         path: |
           ~/.terraform.d/plugin-cache
+          $RUNNER_TEMP
+          $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }}
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
         restore-keys: |
           ${{ runner.os }}-terraform-                
@@ -83,3 +85,40 @@ jobs:
       run: |
         echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform plan -input=false -no-color -out tf.plan
+
+  Terraform_Apply:
+    name: 'Terraform_setup [Init- Format - Validate]'
+    runs-on: ubuntu-latest
+    environment: oci-labs
+  # Use default shell and working directory regardless of the os of the GitHub Actions runner 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.STACK_DIR }}
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    # Create a cache for the terraform pluggin 
+    - name: Config Terraform plugin cache
+      run: |
+        echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+        mkdir --parents ~/.terraform.d/plugin-cache
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          $RUNNER_TEMP
+          $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }}
+        key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-                       
+   # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: |
+        echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
+        pwd
+        which terraform
+        echo the temp directory path is : $RUNNER_TEMP
+        # cd $GITHUB_WORKSPACE/$STACK_DIR
+        terraform init
+        terraform -v           
