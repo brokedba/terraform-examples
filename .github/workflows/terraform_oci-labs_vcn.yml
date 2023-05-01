@@ -87,9 +87,10 @@ jobs:
         terraform plan -input=false -no-color -out tf.plan
 
   Terraform_Apply:
-    name: 'Terraform_setup [Init- Format - Validate]'
+    name: 'Terraform Apply'
     runs-on: ubuntu-latest
     environment: oci-labs
+    needs: [terraform_setup]
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
     defaults:
       run:
