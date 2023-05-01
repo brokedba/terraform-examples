@@ -16,7 +16,7 @@ env:
   
 defaults:
  run:
-   working-directory: ./$STACK_DIR
+   working-directory:  $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }}
  
 # permissions:
 #  contents: read
