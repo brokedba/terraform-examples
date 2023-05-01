@@ -14,9 +14,9 @@ env:
   TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
-defaults:
- run:
-   working-directory:  /home/runner/work/terraform-examples/terraform-examples/terraform-provider-oci-create-vcn
+#defaults:
+ #run:
+ #  working-directory:  $GITHUB_WORKSPACE/$TF_STACK_DIR
  
 # permissions:
 #  contents: read
