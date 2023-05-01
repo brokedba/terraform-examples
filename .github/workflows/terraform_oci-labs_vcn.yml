@@ -22,7 +22,7 @@ env:
 
 jobs:
   terraform_setup:
-    name: 'Terraform_setup'
+    name: 'Terraform_setup [Init- Format - Validate]'
     runs-on: ubuntu-latest
     environment: oci-labs
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
@@ -75,15 +75,8 @@ jobs:
         echo  ====== VALIDTAE the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform validate
 
-
-
-
-
-
-
-
-
-
-
-
-
+    - name: Terraform Plan
+      id: plan
+      run: |
+        echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        terraform plan -input=false -no-color -out tf.plan
