@@ -31,7 +31,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ vars.TF_STACK_DIR }}
+        working-directory: ${{ env.STACK_DIR }}
 
     steps:
     - run: pwd
