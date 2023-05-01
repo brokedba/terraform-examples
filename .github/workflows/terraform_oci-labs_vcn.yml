@@ -16,7 +16,7 @@ env:
   
 defaults:
  run:
-   working-directory:  $GITHUB_WORKSPACE/$STACK_DIR
+   working-directory:  /home/runner/work/terraform-examples/terraform-examples/terraform-provider-oci-create-vcn
  
 # permissions:
 #  contents: read
