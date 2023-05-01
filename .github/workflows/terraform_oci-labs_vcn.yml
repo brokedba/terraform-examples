@@ -56,7 +56,7 @@ jobs:
         path: |
           ~/.terraform.d/plugin-cache
           $RUNNER_TEMP
-          $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }}
+          $GITHUB_WORKSPACE
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
         restore-keys: |
           ${{ runner.os }}-terraform-                
@@ -105,7 +105,7 @@ jobs:
         path: |
           ~/.terraform.d/plugin-cache
           $RUNNER_TEMP
-          $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }}
+          $GITHUB_WORKSPACE
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
         restore-keys: |
           ${{ runner.os }}-terraform-     
