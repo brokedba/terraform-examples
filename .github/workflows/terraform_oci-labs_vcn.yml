@@ -33,12 +33,9 @@ jobs:
         working-directory: ${{ env.STACK_DIR }}
 
     steps:
-   # - run: pwd
-   # - run: echo "the GITHUB_WORKSPACE value is => $GITHUB_WORKSPACE or vars ${{ vars.GITHUB_WORKSPACE }}"
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
-      
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -46,15 +43,13 @@ jobs:
       with:
         terraform_version: 1.0.3
         terraform_wrapper: false
-    - run: ls     
-    #   cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }} --> Terraform cloud
      
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
-        echo  working dir:  $WORKING_DIR
-        echo  git.stack_dir: $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }}
+        echo ***** Terraform working directory is git.stack_dir: $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ******
         pwd
-        cd $GITHUB_WORKSPACE/$STACK_DIR
+        # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
         terraform -v 
