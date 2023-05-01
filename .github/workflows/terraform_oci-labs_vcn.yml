@@ -22,6 +22,10 @@ env:
 #  contents: read
 
 jobs:
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.STACK_DIR }}
   terraform_setup:
     name: 'Terraform_setup [Init- Format - Validate]'
     runs-on: ubuntu-latest
