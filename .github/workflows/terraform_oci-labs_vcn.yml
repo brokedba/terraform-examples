@@ -65,6 +65,7 @@ jobs:
         echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
         pwd
         which terraform
+        echo the temp directory path is : $RUNNER_TEMP
         # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
         terraform -v 
