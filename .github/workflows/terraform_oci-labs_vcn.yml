@@ -67,8 +67,7 @@ jobs:
         echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
         pwd
         which terraform
-        terra_path=`which terraform`
-        echo terra_path=$terra_path >> "$GITHUB_OUTPUT"
+        echo  terra_path=`which terraform` >> "$GITHUB_OUTPUT"
         echo the temp directory path is : $RUNNER_TEMP
         # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
@@ -125,7 +124,7 @@ jobs:
         pwd
         which terraform
         ls tf.plan
-        TERRAPATH="${{ needs.terraform_setup.outputs.terrapath }}"
+        TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
         echo $TERRAPATH
         cp $TERRAPATH /usr/bin/
         which terraform
