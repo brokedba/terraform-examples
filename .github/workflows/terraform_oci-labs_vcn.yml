@@ -15,9 +15,9 @@ env:
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   WORKING_DIR: ${{ vars.GITHUB_WORKSPACE }}/${{ vars.TF_STACK_DIR }}
   
-defaults:
- run:
-  working-directory: $GITHUB_WORKSPACE/$TF_STACK_DIR
+#defaults:
+# run:
+#  working-directory: $GITHUB_WORKSPACE/$TF_STACK_DIR
  
 # permissions:
 #  contents: read
@@ -34,7 +34,7 @@ jobs:
         working-directory: $GITHUB_WORKSPACE/$TF_STACK_DIR
 
     steps:
-    - run: echo $GITHUB_WORKSPACE/$TF_STACK_DIR
+    - run: pwd
     - run: echo "the GITHUB_WORKSPACE value is => $GITHUB_WORKSPACE or vars ${{ vars.GITHUB_WORKSPACE }}"
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
