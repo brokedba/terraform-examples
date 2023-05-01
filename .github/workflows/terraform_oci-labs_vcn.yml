@@ -127,6 +127,7 @@ jobs:
         TERRAPATH="${{ needs.terraform_setup.outputs.terrapath }}"
         echo $TERRAPATH
         cp $TERRAPATH /usr/bin/
+        which terraform
         echo the temp directory path is : $RUNNER_TEMP
         # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
