@@ -110,7 +110,7 @@ jobs:
       with:
         path: |
           ~/.terraform.d/plugin-cache
-          $RUNNER_TEMP
+          $RUNNER_TEMP/*
           ./*
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
         restore-keys: |
