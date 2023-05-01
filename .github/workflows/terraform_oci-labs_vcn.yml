@@ -16,7 +16,7 @@ env:
   
 defaults:
  run:
-  working-directory: ${{ env.STACK_DIR }}
+   working-directory: ${{ env.STACK_DIR }}
  
 # permissions:
 #  contents: read
