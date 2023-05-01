@@ -61,16 +61,29 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
-        echo ***** Terraform working directory is git.stack_dir: $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ******
+        echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
         pwd
         # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
         terraform -v 
     - name: Terraform format
       run: |
-        echo  ***** format the Terraform configuration in $STACK_DIR  ******
+        echo  ====== FORMAT the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform fmt  
     - name: Terraform Validate
       run: |
-        echo  ***** Validate the Terraform configuration in $STACK_DIR  ******
+        echo  ====== VALIDTAE the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform validate
+
+
+
+
+
+
+
+
+
+
+
+
+
