@@ -16,17 +16,16 @@ env:
   
 #defaults:
  #run:
- #  working-directory:  $GITHUB_WORKSPACE/$TF_STACK_DIR
  
 # permissions:
 #  contents: read
 
 jobs:
   terraform_setup:
-    name: 'Terraform'
+    name: 'Terraform_setup'
     runs-on: ubuntu-latest
     environment: oci-labs
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+  # Use default shell and working directory regardless of the os of the GitHub Actions runner 
     defaults:
       run:
         shell: bash
@@ -67,3 +66,8 @@ jobs:
         # cd $GITHUB_WORKSPACE/$STACK_DIR
         terraform init
         terraform -v 
+  
+    - name: Terraform format
+      run: |
+        echo  ***** Validate the Terraform configuration in $STACK_DIR  ******
+        terraform validate
