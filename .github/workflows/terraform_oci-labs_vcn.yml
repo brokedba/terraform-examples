@@ -34,7 +34,7 @@ jobs:
         working-directory: ${{ env.STACK_DIR }}
 
     steps:
-    - run: pwd
+   # - run: pwd
     - run: echo "the GITHUB_WORKSPACE value is => $GITHUB_WORKSPACE or vars ${{ vars.GITHUB_WORKSPACE }}"
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
