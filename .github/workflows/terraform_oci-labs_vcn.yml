@@ -30,7 +30,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        # working-directory: ${{ env.STACK_DIR }}
+        working-directory: ${{ env.STACK_DIR }}
 
     steps:
     - run: pwd
