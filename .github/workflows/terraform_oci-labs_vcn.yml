@@ -15,26 +15,24 @@ env:
   TF_VAR_region: ${{ vars.TF_VAR_region }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
-#defaults:
- #run:
+defaults:
+  run:
+    shell: bash
+    working-directory: ${{ env.STACK_DIR }}
  
 # permissions:
 #  contents: read
 
 jobs:
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ env.STACK_DIR }}
   terraform_setup:
     name: 'Terraform_setup [Init- Format - Validate]'
     runs-on: ubuntu-latest
     environment: oci-labs
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ env.STACK_DIR }}
+ #   defaults:
+  #    run:
+   #     shell: bash
+    #    working-directory: ${{ env.STACK_DIR }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner
