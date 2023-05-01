@@ -13,7 +13,7 @@ env:
   TF_VAR_compartment_ocid: ${{ secrets.USER_OCID }}
   TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
-  WORKING_DIR: "${{ vars.GITHUB_WORKSPACE }}/${{ vars.STACK_DIR }}"
+  WORKING_DIR: "${{ vars.GITHUB_WORKSPACE }}/${{ STACK_DIR }}"
   
 defaults:
  run:
