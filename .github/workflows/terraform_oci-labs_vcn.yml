@@ -142,7 +142,7 @@ jobs:
           ./tf.plan
         key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
         restore-keys: |
-          ${{ runner.os }}-terraform-apply     
+          ${{ runner.os }}-terraform-apply-     
  #############
  # DESTROY
  #############
@@ -198,5 +198,6 @@ jobs:
     - name: Terraform Plan
       id: plan
       run: |
-        echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
-        terraform plan -input=false -no-color -out tf.plan
+        echo  ====== Destroy the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        # terraform plan -input=false -no-color -out tf.plan
+
