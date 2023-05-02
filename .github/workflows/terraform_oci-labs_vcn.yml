@@ -18,13 +18,13 @@ env:
 defaults:
   run:
     shell: bash
-    working-directory: $STACK_DIR
+    working-directory: $TF_STACK_DIR
 # permissions:
 #  contents: read
 
 jobs:
   terraform_setup:
-    name: 'Terraform_setup [Init- Format - Validate]'
+    name: 'Terraform Init-Fmt-Validate'
     runs-on: ubuntu-latest
     environment: oci-labs
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
