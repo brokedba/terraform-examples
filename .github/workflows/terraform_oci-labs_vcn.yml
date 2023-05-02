@@ -82,10 +82,13 @@ jobs:
     - name: Terraform Validate
       run: |
         echo  ====== VALIDTAE the Terraform configuration in ${{ env.STACK_DIR }}  ======
-        terraform validate
-                
+        terraform validate             
     outputs:
       terra_path: ${{ steps.init.outputs.terra_bin }}
+  
+ #############
+ # APPLY
+ ############# 
   Terraform_Apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
@@ -139,4 +142,61 @@ jobs:
           ./tf.plan
         key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
         restore-keys: |
-          ${{ runner.os }}-terraform-apply      
+          ${{ runner.os }}-terraform-apply     
+ #############
+ # DESTROY
+ #############
+  Terraform_Destroy:
+    name: 'Terraform Destroy'
+    runs-on: ubuntu-latest
+    environment: oci-labs
+    needs: [Terraform_Apply]
+# Use default shell and working directory regardless of the os of the GitHub Actions runner 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.STACK_DIR }}
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Restore a cache for the terraform pluggin 
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          ./*
+        key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-     
+  # Configure terraform pluggin in the new runner                          
+    - name: Config Terraform plugin cache
+      run: |
+        echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+        mkdir --parents ~/.terraform.d/plugin-cache
+  # Restore a cache for the terraform state file 
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ./tf.plan
+        key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-apply             
+  # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: |
+        echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
+        #pwd
+        # TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
+        # echo old terraform binary location: $TERRAPATH
+        ls tf.plan
+        echo "== Reusing cached version of terraform =="
+        sudo cp ./terraform  /usr/local/bin/
+        terraform -v      
+    - name: Terraform Plan
+      id: plan
+      run: |
+        echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        terraform plan -input=false -no-color -out tf.plan
