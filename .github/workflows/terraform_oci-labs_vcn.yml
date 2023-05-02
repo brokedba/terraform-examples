@@ -130,7 +130,7 @@ jobs:
         ls tf.plan
         TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
         echo old terraform binary location: $TERRAPATH
-        cp ./terraform /usr/bin/
+        cp ./terraform  /usr/local/bin/
         which terraform
         echo the temp directory path is : $RUNNER_TEMP
         # cd $GITHUB_WORKSPACE/$STACK_DIR
