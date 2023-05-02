@@ -15,10 +15,11 @@ env:
   TF_VAR_region: ${{ vars.TF_VAR_region }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
-defaults:
-  run:
-    shell: bash
-    working-directory: $STACK_DIR
+#defaults:
+#  run:
+#    shell: bash
+#    working-directory: $STACK_DIR
+# >> An error occurred trying to start process '/usr/bin/bash' with working directory ../$STACK_DIR No such file or directory 
 # permissions:
 #  contents: read
 
@@ -28,16 +29,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: oci-labs
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
- #   defaults:
-  #    run:
-   #     shell: bash
-    #    working-directory: ${{ env.STACK_DIR }}
+    defaults:
+     run:
+       shell: bash
+       working-directory: ${{ env.STACK_DIR }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
-    - run: echo STACVK dir = $STACK_DIR
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -52,12 +52,13 @@ jobs:
       run: |
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
         mkdir --parents ~/.terraform.d/plugin-cache
+        terra_bin=`which terraform`
+        cp $terra_bin .
     - name: Cache Terraform
       uses: actions/cache@v3
       with:
         path: |
           ~/.terraform.d/plugin-cache
-          $RUNNER_TEMP/*
           ./*
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
         restore-keys: |
@@ -69,11 +70,9 @@ jobs:
       run: |
         echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
         pwd
-        which terraform
-        terra_bin=`which terraform`
         echo  terra_bin=$terra_bin >> "$GITHUB_OUTPUT"
-        echo the temp directory path is : $RUNNER_TEMP
-        # cd $GITHUB_WORKSPACE/$STACK_DIR
+        # echo the temp directory path is : $RUNNER_TEMP
+        
         terraform init
         terraform -v 
     - name: Terraform format
@@ -90,6 +89,7 @@ jobs:
       run: |
         echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform plan -input=false -no-color -out tf.plan
+                
     outputs:
       terra_path: ${{ steps.init.outputs.terra_bin }}
   Terraform_Apply:
@@ -112,7 +112,6 @@ jobs:
       with:
         path: |
           ~/.terraform.d/plugin-cache
-          $RUNNER_TEMP/*
           ./*
         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
         restore-keys: |
@@ -130,8 +129,8 @@ jobs:
         which terraform
         ls tf.plan
         TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
-        echo $TERRAPATH
-        cp $TERRAPATH /usr/bin/
+        echo old terraform binary location: $TERRAPATH
+        cp ./terraform /usr/bin/
         which terraform
         echo the temp directory path is : $RUNNER_TEMP
         # cd $GITHUB_WORKSPACE/$STACK_DIR
