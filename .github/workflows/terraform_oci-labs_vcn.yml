@@ -18,7 +18,7 @@ env:
 defaults:
   run:
     shell: bash
-    working-directory: ${{TF_STACK_DIR}}
+    working-directory: ${{STACK_DIR}}
  
 # permissions:
 #  contents: read
