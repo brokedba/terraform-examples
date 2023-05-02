@@ -139,7 +139,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          ./*tf.plan
+          ./*
         key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-terraform-apply-     
@@ -180,7 +180,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          ./*tf.plan
+          ./*
         key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-terraform-apply             
