@@ -24,9 +24,9 @@ env:
 #  contents: read
 
 jobs:
- #############
+ # ############
  # INIT
- ############# 
+ # ############
   terraform_setup:
     name: 'Terraform Init-Fmt-Validate'
     runs-on: ubuntu-latest
@@ -89,9 +89,9 @@ jobs:
     outputs:
       terra_path: ${{ steps.init.outputs.terra_bin }}
   
- #############
+ # ############
  # APPLY
- ############# 
+ # ############ 
   Terraform_Apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
@@ -145,9 +145,9 @@ jobs:
         key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-terraform-apply-     
- #############
+ # ############
  # DESTROY
- #############
+ # ############
   Terraform_Destroy:
     name: 'Terraform Destroy'
     runs-on: ubuntu-latest
