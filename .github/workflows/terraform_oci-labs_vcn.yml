@@ -24,6 +24,9 @@ env:
 #  contents: read
 
 jobs:
+ #############
+ # INIT
+ ############# 
   terraform_setup:
     name: 'Terraform Init-Fmt-Validate'
     runs-on: ubuntu-latest
