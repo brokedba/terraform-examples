@@ -137,14 +137,14 @@ jobs:
         echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform plan -input=false -no-color -out tf.plan
   # Create a cache for the terraform state file 
- #   - name: Cache Terraform statefile
- #     uses: actions/cache@v3
- #     with:
- #       path: |
- #         ./*
- #       key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
- #       restore-keys: |
- #         ${{ runner.os }}-terraform-apply-     
+    - name: Cache Terraform statefile
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{ env.STACK_DIR }}/tf.plan
+        key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-apply-     
  #############
  # DESTROY
  #############
@@ -178,14 +178,14 @@ jobs:
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
         mkdir --parents ~/.terraform.d/plugin-cache
   # Restore a cache for the terraform state file 
- #   - name: Cache Terraform statefile
- #     uses: actions/cache@v3
- #     with:
- #       path: |
- #         ./*
- #       key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
- #       restore-keys: |
- #         ${{ runner.os }}-terraform-apply             
+   - name: Cache Terraform statefile
+     uses: actions/cache@v3
+     with:
+       path: |
+         ${{ env.STACK_DIR }}/tf.plan
+       key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
+       restore-keys: |
+         ${{ runner.os }}-terraform-apply             
   # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
