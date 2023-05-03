@@ -178,9 +178,9 @@ jobs:
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
         mkdir --parents ~/.terraform.d/plugin-cache
   # Restore a cache for the terraform state file 
-   - name: Cache Terraform statefile
-     uses: actions/cache@v3
-     with:
+    - name: Cache Terraform statefile
+      uses: actions/cache@v3
+      with:
        path: |
          ${{ env.STACK_DIR }}/tf.plan
        key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
