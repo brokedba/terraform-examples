@@ -141,7 +141,6 @@ jobs:
       if: github.event_name == 'push'
       run: |
         echo  ====== APPLY execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
-        export TF_VAR_private_key=`openssl rsa -in ${{ vars.TF_VAR_private_key }} -check`
         terraform apply --auto-approve
   # Create a cache for the terraform state file 
     - name: Cache Terraform statefile
