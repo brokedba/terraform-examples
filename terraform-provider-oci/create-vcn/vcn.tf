@@ -5,7 +5,7 @@ terraform {
      oci = {
       source  = "oracle/oci"
         }
-    }
+     }
    }
 
 provider "oci" {
