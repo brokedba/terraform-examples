@@ -6,7 +6,7 @@ terraform {
       source  = "oracle/oci"
         }
      }
-   }
+  }
 
 provider "oci" {
   region               = var.region
