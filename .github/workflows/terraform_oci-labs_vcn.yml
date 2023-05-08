@@ -141,7 +141,8 @@ jobs:
       if: github.event_name == 'push'
       run: |
         echo  ====== APPLY execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
-        terraform apply --auto-approve
+        terraform plan -input=false -no-color -out tf.plan
+        terraform apply --auto-approve tf.plan
   # Create a cache for the terraform state file 
     - name: Cache Terraform statefile
       uses: actions/cache@v3
