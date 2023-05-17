@@ -10,7 +10,7 @@ variable "region" {}
 variable "availability_domain_name" {
   default     = ""
   description = "Availability Domain"
-}
+ }
 
     variable "vcn_display_name" {
       default = "Terravcn"
