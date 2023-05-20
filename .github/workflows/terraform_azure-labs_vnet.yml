@@ -11,6 +11,7 @@ env:
   ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   TF_VAR_az_location: "${{ vars.az_location }}"
+  TF_VAR_prefix: "${{ vars.TF_APP_PREFIX }}" 
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
 permissions:
