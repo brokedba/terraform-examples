@@ -14,7 +14,7 @@ env:
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
 permissions:
-  contents: write
+  id-token: write
 
 jobs:
  # ############
