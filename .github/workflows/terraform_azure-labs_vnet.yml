@@ -50,16 +50,8 @@ jobs:
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
         mkdir --parents ~/.terraform.d/plugin-cache
         terra_bin=`which terraform`
+        ls 
         cp $terra_bin .
-    - name: Cache Terraform
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.terraform.d/plugin-cache
-          ./*
-        key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
-        restore-keys: |
-          ${{ runner.os }}-terraform-                
      
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -72,6 +64,15 @@ jobs:
         
         terraform init
         terraform -v 
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          ./*
+        key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-                
     - name: Terraform format
       run: |
         echo  ====== FORMAT the Terraform configuration in ${{ env.STACK_DIR }}  ======
@@ -211,7 +212,7 @@ jobs:
         pwd
         # TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
         # echo old terraform binary location: $TERRAPATH
-        # ls terraform.tfstate
+         ls terraform.tfstate
         echo "== Reusing cached version of terraform =="
         sudo cp ./terraform  /usr/local/bin/
         terraform -v      
