@@ -1,4 +1,4 @@
-name: 'Terraform_oci_vcn'
+name: 'Terraform_azure_vnet'
 
 on:
   push:
