@@ -1,6 +1,6 @@
 # Azure account region and authentication 
 variable "prefix" {
-  description = "The prefix used for all resources in this example "
+ description = "The prefix used for all resources in this example "
      }
 
 variable "az_location" {
