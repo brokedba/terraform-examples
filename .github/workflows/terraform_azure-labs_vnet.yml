@@ -13,6 +13,8 @@ env:
   TF_VAR_az_location: "${{ vars.az_location }}"
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
+permissions:
+contents:write
 
 jobs:
  # ############
