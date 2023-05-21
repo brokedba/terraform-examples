@@ -132,7 +132,7 @@ jobs:
       run: |
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
         ls -ltr
-        ls ~
+        ls $GITHUB_WORKSPACE
         cp .terraform.d/plugin-cache .
         mkdir --parents ~/.terraform.d/plugin-cache
    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
