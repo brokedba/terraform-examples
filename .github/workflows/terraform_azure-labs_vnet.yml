@@ -56,6 +56,8 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
         gh extension install actions/gh-actions-cache
