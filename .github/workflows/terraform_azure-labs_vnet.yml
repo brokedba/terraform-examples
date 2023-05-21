@@ -62,6 +62,7 @@ jobs:
         gh actions-cache list
         gh actions-cache list --key Linux-terraform-apply-5036165229
         gh actions-cache delete Linux-terraform-apply-5036165229
+        gh actions-cache delete Linux-terraform-
         pwd
         echo  terra_bin=$terra_bin >> "$GITHUB_OUTPUT"
         # echo the temp directory path is : $RUNNER_TEMP
