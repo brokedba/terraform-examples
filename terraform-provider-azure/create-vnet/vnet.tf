@@ -55,7 +55,7 @@ resource "azurerm_network_security_group" "terra_nsg" {
     destination_address_prefix = "*"
   }
 security_rule {
-    name                       = "Inbound HTTP access"
+    name                       = "Inbound_HTTP_access"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
