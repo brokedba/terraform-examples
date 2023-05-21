@@ -25,7 +25,6 @@ jobs:
     name: 'Terraform Init-Fmt-Validate'
     runs-on: ubuntu-latest
     environment: az-labs
-    permissions: write-all
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
     defaults:
      run:
@@ -57,19 +56,11 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
-        gh extension install actions/gh-actions-cache
-        gh actions-cache list
-        gh actions-cache list --key Linux-terraform-apply-5036165229 
-        gh actions-cache delete Linux-terraform-apply-5036165229 --confirm
-        gh actions-cache delete Linux-terraform-   --confirm
         pwd
         echo  terra_bin=$terra_bin >> "$GITHUB_OUTPUT"
         # echo the temp directory path is : $RUNNER_TEMP
-        
         terraform init
         terraform -v 
         ls -ltr  ~/.terraform.d/plugin-cache
@@ -183,6 +174,7 @@ jobs:
     name: 'Terraform Destroy'
     runs-on: ubuntu-latest
     environment: az-labs
+    permissions: write-all
     needs: [Terraform_Apply]
 # Use default shell and working directory regardless of the os of the GitHub Actions runner 
     defaults:
@@ -238,3 +230,14 @@ jobs:
       run: |
         echo  ====== Destroy the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform destroy --auto-approve
+ # clean terraform cache after destroy completion       
+    - name: clean cache
+      id: cache_deletion
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh extension install actions/gh-actions-cache
+        echo " deleting tfstate caches"
+        gh actions-cache list
+        gh actions-cache delete ${{ runner.os }}-terraform-apply-${{ github.run_id }} --confirm
+        gh actions-cache delete Linux-terraform-   --confirm
