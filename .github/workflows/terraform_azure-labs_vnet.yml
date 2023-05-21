@@ -16,9 +16,6 @@ env:
   
 permissions:
   id-token: write
-  contents: write
-  packages: write
-  deployments: write
 
 jobs:
  # ############
@@ -28,6 +25,8 @@ jobs:
     name: 'Terraform Init-Fmt-Validate'
     runs-on: ubuntu-latest
     environment: az-labs
+    permissions:
+      id-token: write
   # Use default shell and working directory regardless of the os of the GitHub Actions runner 
     defaults:
      run:
