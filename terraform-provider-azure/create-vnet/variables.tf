@@ -3,7 +3,7 @@ variable "prefix" {
  description = "The prefix used for all resources in this example"
      }
 
-variable "az_location" {
+variable "az_location"  {
     default = "eastus"
     }
 # VPC INFO
