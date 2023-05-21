@@ -64,6 +64,7 @@ jobs:
         
         terraform init
         terraform -v 
+        ls -ltr  ~/.terraform.d/plugin-cache
     - name: Cache Terraform
       uses: actions/cache@v3
       with:
