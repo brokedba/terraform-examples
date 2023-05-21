@@ -3,7 +3,7 @@
     }
 provider "azurerm" {
     features {
-          }
+         }
     }
 #################
 # RESOURCE GROUP
