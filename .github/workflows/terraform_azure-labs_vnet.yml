@@ -199,7 +199,6 @@ jobs:
     - name: Config Terraform plugin cache
       run: |
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-        mkdir --parents ~/.terraform.d/plugin-cache
   # Restore a cache for the terraform state file 
     - name: Cache Terraform statefile
       uses: actions/cache@v3
@@ -230,4 +229,4 @@ jobs:
       id: destroy
       run: |
         echo  ====== Destroy the Terraform configuration in ${{ env.STACK_DIR }}  ======
-        echo terraform destroy --auto-approve
+        terraform destroy --auto-approve
