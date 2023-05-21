@@ -167,7 +167,7 @@ jobs:
           ${{ env.STACK_DIR }}/terraform.tfstate
         key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
         restore-keys: |
-          ${{ runner.os }}-terraform-apply-     
+          ${{ runner.os }}-terraform-apply-${{ github.run_id }}     
  # ############
  # DESTROY
  # ############
@@ -241,4 +241,4 @@ jobs:
         echo " deleting tfstate caches"
         gh actions-cache list
         gh actions-cache delete ${{ runner.os }}-terraform-apply-${{ github.run_id }} --confirm
-        gh actions-cache delete Linux-terraform-   --confirm
+        gh actions-cache delete ${{ runner.os }}-terraform-${{ env.STACK_DIR }}   --confirm
