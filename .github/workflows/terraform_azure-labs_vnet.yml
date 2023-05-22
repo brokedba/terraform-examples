@@ -44,16 +44,15 @@ jobs:
         terraform_wrapper: false
            # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }} --> Terraform cloud
     
-    # Create a cache for the terraform pluggin 
+    # Create a cache for the terraform pluggin and copy tf binary
     - name: Config Terraform plugin cache
       run: |
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
         mkdir --parents ~/.terraform.d/plugin-cache
         terra_bin=`which terraform`
-        ls 
         cp $terra_bin .
      
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    # Initialize a new or existing Terraform working directory(creating initial files, loading any remote state, downloading modules..)
     - name: Terraform Init
       id: init
       run: |
@@ -63,7 +62,7 @@ jobs:
         # echo the temp directory path is : $RUNNER_TEMP
         terraform init
         terraform -v 
-  #     ls -ltr  ~/.terraform.d/plugin-cache       
+    #  Save all plugin files and working Directory in a cache
     - name: Cache Terraform
       uses: actions/cache@v3
       with:
@@ -73,7 +72,7 @@ jobs:
         key: ${{ runner.os }}-terraform-${{ env.STACK_DIR }} 
         restore-keys: |
           ${{ runner.os }}-terraform-${{ env.STACK_DIR }}        
-#${{ hashFiles('**/.terraform.lock.hcl') }}             
+    #         ${{ hashFiles('**/.terraform.lock.hcl') }}             
     - name: Terraform format
       run: |
         echo  ====== FORMAT the Terraform configuration in ${{ env.STACK_DIR }}  ======
@@ -82,13 +81,14 @@ jobs:
       run: |
         echo  ====== VALIDATE the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform validate  
+    #  Authenticate with Azure using OIDC Workload Federated Identiry (i.e User Manged Identity)       
     - name: 'Az CLI login'
       uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
+# PLAN
     - name: Terraform Plan
       id: plan
       run: |
@@ -105,16 +105,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: az-labs
     needs: [terraform_setup]
-  # Use default shell and working directory regardless of the os of the GitHub Actions runner 
+# Use default shell and working directory regardless of the os of the GitHub Actions runner 
     defaults:
       run:
         shell: bash
         working-directory: ${{ env.STACK_DIR }}
     steps:
-    # Checkout the repository to the GitHub Actions runner
-#    - name: Checkout
-#      uses: actions/checkout@v3
-    # Create a cache for the terraform pluggin 
+    # Checkout the repository to the GitHub Actions runner not necessary. The cache has it
     - name: Cache Terraform
       uses: actions/cache@v3
       with:
@@ -124,23 +121,22 @@ jobs:
         key: ${{ runner.os }}-terraform-${{ env.STACK_DIR }}
         restore-keys: |
           ${{ runner.os }}-terraform-${{ env.STACK_DIR }}     
-  # Configure terraform pluggin in the new runner                          
+    # Configure terraform pluggin in the new runner                          
     - name: Config Terraform plugin cache
       run: |
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
 
-   # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-#    - name: Terraform Init
-#      run: |
-#        echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
+    # terraform init not needed here . int files are already in the cache
         # TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
         # echo old terraform binary location: $TERRAPATH
+    #  Authenticate with Azure using OIDC Workload Federated Identiry (i.e User Manged Identity)      
     - name: 'Az CLI login'
       uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+# APPLY    
     - name: Terraform Apply
       id: plan
       if: github.event_name == 'push'
@@ -151,7 +147,7 @@ jobs:
         terraform -v      
         terraform plan -input=false -no-color -out tf.plan
         terraform apply --auto-approve tf.plan
-  # Create a cache for the terraform state file 
+    # Create a cache for the terraform state file 
     - name: Cache Terraform statefile
       uses: actions/cache@v3
       with:
@@ -175,10 +171,7 @@ jobs:
         shell: bash
         working-directory: ${{ env.STACK_DIR }}
     steps:
-    # Checkout the repository to the GitHub Actions runner
-#    - name: Checkout
-#      uses: actions/checkout@v3
-    # Restore a cache for the terraform pluggin 
+    # Checkout the repository to the GitHub Actions runner not necessary. The cache has it
     - name: Cache Terraform
       uses: actions/cache@v3
       with:
@@ -188,11 +181,11 @@ jobs:
         key: ${{ runner.os }}-terraform-${{ env.STACK_DIR }}
         restore-keys: |
           ${{ runner.os }}-terraform-${{ env.STACK_DIR }}     
-  # Configure terraform pluggin in the new runner                          
+    # Configure terraform pluggin in the new runner                          
     - name: Config Terraform plugin cache
       run: |
         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-  # Restore a cache for the terraform state file 
+    # Restore a cache for the terraform state file 
     - name: Cache Terraform statefile
       uses: actions/cache@v3
       with:
@@ -201,20 +194,17 @@ jobs:
        key: ${{ runner.os }}-terraform-apply-${{ github.run_id }}
        restore-keys: |
          ${{ runner.os }}-terraform-apply             
-  # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-#    - name: Terraform Init
-#      run: |
-#        echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
-#        pwd
-      # TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
-#        echo old terraform binary location: $TERRAPATH
-#        ls terraform.tfstate
+    # terraform init not needed here . int files are already in the cache
+    #        ls terraform.tfstate
+    #  Authenticate with Azure using OIDC Workload Federated Identiry (i.e User Manged Identity)  
     - name: 'Az CLI login'
       uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}    
+    # clean terraform cache after destroy completion  
+# DESTROY      
     - name: Terraform Destroy
       id: destroy
       run: |
@@ -223,7 +213,7 @@ jobs:
         sudo cp ./terraform  /usr/local/bin/
         terraform -v      
         terraform destroy --auto-approve
- # clean terraform cache after destroy completion       
+    # clean terraform cache after destroy completion       
     - name: clean cache
       id: cache_deletion
       env:
