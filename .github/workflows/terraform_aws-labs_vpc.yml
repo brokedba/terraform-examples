@@ -1,0 +1,227 @@
+name: 'Terraform_aws_vpc'
+
+on:
+  push:
+    branches: [ "git_actions" ]
+    paths:
+      - 'terraform-provider-aws/create-vpc/*tf'         
+env:
+  TF_VAR_aws_region: "${{ vars.AWS_REGION }}"
+  STACK_DIR: ${{ vars.TF_STACK_DIR }}
+  
+permissions:
+  id-token: write
+
+jobs:
+ # ############
+ # INIT
+ # ############
+  terraform_setup:
+    name: 'Terraform Init-Validate'
+    runs-on: ubuntu-latest
+    environment: aws-labs
+  # Use default shell and working directory regardless of the os of the GitHub Actions runner 
+    defaults:
+     run:
+       shell: bash
+       working-directory: ${{ env.STACK_DIR }}
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.3
+        terraform_wrapper: false
+           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }} --> Terraform cloud
+    
+    # Create a cache for the terraform pluggin and copy tf binary
+    - name: Config Terraform plugin cache
+      run: |
+        echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+        mkdir --parents ~/.terraform.d/plugin-cache
+        terra_bin=`which terraform`
+        cp $terra_bin .
+     
+    # Initialize a new or existing Terraform working directory(creating initial files, loading any remote state, downloading modules..)
+    - name: Terraform Init
+      id: init
+      run: |
+        echo ====== INITIALIZE terraform provider plugins : $GITHUB_WORKSPACE/${{ vars.TF_STACK_DIR }} ======
+        pwd
+        echo  terra_bin=$terra_bin >> "$GITHUB_OUTPUT"
+        # echo the temp directory path is : $RUNNER_TEMP
+        terraform init
+        terraform -v  
+    - name: Terraform format
+      run: |
+        echo  ====== FORMAT the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        terraform fmt  
+    - name: Terraform Validate
+      run: |
+        echo  ====== VALIDATE the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        terraform validate  
+    #  Authenticate with AWS using OIDC Workload Federated Identiry 
+    - name: 'Configure AWS credentials'
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }} 
+        # arn:aws:iam::1234567890:role/example-role
+        role-session-name: MySessionName  #${{ secrets.My_sessionName }}
+        aws-region: ${{ vars.AWS_REGION }}
+    - name:  Print assumed Role
+      run: aws sts get-caller-identity     
+      
+# PLAN
+    - name: Terraform Plan
+      id: plan
+      run: |
+        echo  ====== PLAN execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        terraform plan -input=false -no-color -out tf.plan
+
+    #  Save all plugin files and working Directory in a cache
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          ./*
+        key: ${{ runner.os }}-terraform-${{ env.STACK_DIR }} 
+        restore-keys: |
+          ${{ runner.os }}-terraform-${{ env.STACK_DIR }}        
+    #         ${{ hashFiles('**/.terraform.lock.hcl') }}             
+    outputs:
+      terra_path: ${{ steps.init.outputs.terra_bin }}      
+ # ############
+ # APPLY
+ # ############ 
+  Terraform_Apply:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+    environment: aws-labs
+    needs: [terraform_setup]
+# Use default shell and working directory regardless of the os of the GitHub Actions runner 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.STACK_DIR }}
+    steps:
+    # Checkout the repository to the GitHub Actions runner not necessary. The cache has it
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          ./*
+        key: ${{ runner.os }}-terraform-${{ env.STACK_DIR }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-${{ env.STACK_DIR }}     
+    # Configure terraform pluggin in the new runner                          
+    - name: Config Terraform plugin cache
+      run: |
+        echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+
+    # terraform init not needed here . int files are already in the cache
+        # TERRAPATH="${{ needs.terraform_setup.outputs.terra_path }}"
+        # echo old terraform binary location: $TERRAPATH
+    #  Authenticate with Azure using OIDC Workload Federated Identiry (i.e User Manged Identity)      
+    - name: 'Configure AWS credentials'
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }} 
+        # arn:aws:iam::1234567890:role/example-role
+        role-session-name: MySessionName  #${{ secrets.My_sessionName }}
+        aws-region: ${{ vars.AWS_REGION }}
+# APPLY    
+    - name: Terraform Apply
+      id: plan
+      if: github.event_name == 'push'
+      run: |
+        echo  ====== APPLY execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        echo "== Reusing cached version of terraform =="
+        sudo cp ./terraform  /usr/local/bin/
+        terraform -v      
+        terraform plan -input=false -no-color -out tf.plan
+        terraform apply --auto-approve tf.plan
+    # Create a cache for the terraform state file 
+    - name: Cache Terraform statefile
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{ env.STACK_DIR }}/terraform.tfstate
+        key: ${{ runner.os }}-terraform-apply-aws-${{ github.run_id }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-apply-${{ github.run_id }}     
+ # ############
+ # DESTROY
+ # ############
+  Terraform_Destroy:
+    name: 'Terraform Destroy'
+    runs-on: ubuntu-latest
+    environment: aws-labs
+    permissions: write-all
+    needs: [Terraform_Apply]
+# Use default shell and working directory regardless of the os of the GitHub Actions runner 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.STACK_DIR }}
+    steps:
+    # Checkout the repository to the GitHub Actions runner not necessary. The cache has it
+    - name: Cache Terraform
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.terraform.d/plugin-cache
+          ./*
+        key: ${{ runner.os }}-terraform-${{ env.STACK_DIR }}
+        restore-keys: |
+          ${{ runner.os }}-terraform-${{ env.STACK_DIR }}     
+    # Configure terraform pluggin in the new runner                          
+    - name: Config Terraform plugin cache
+      run: |
+        echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+    # Restore a cache for the terraform state file 
+    - name: Cache Terraform statefile
+      uses: actions/cache@v3
+      with:
+       path: |
+         ${{ env.STACK_DIR }}/terraform.tfstate
+       key: ${{ runner.os }}-terraform-apply-aws-${{ github.run_id }}
+       restore-keys: |
+         ${{ runner.os }}-terraform-apply             
+    # terraform init not needed here . int files are already in the cache
+    #        ls terraform.tfstate
+    #  Authenticate with Azure using OIDC Workload Federated Identiry (i.e User Manged Identity)  
+    - name: 'Configure AWS credentials'
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }} 
+        # arn:aws:iam::1234567890:role/example-role
+        role-session-name: MySessionName  #${{ secrets.My_sessionName }}
+        aws-region: ${{ vars.AWS_REGION }}    
+    # clean terraform cache after destroy completion  
+# DESTROY      
+    - name: Terraform Destroy
+      id: destroy
+      run: |
+        echo  ====== Destroy the Terraform configuration in ${{ env.STACK_DIR }}  ======
+        echo "== Reusing cached version of terraform =="
+        sudo cp ./terraform  /usr/local/bin/
+        terraform -v      
+        terraform destroy --auto-approve
+    # clean terraform cache after destroy completion       
+    - name: clean cache
+      id: cache_deletion
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh extension install actions/gh-actions-cache
+        echo " deleting tfstate caches"
+        gh actions-cache list
+        gh actions-cache delete ${{ runner.os }}-terraform-apply-aws-${{ github.run_id }} --confirm
+        gh actions-cache delete ${{ runner.os }}-terraform-${{ env.STACK_DIR }}   --confirm
