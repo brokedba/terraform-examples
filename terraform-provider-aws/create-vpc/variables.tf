@@ -6,7 +6,7 @@ variable "aws_region" {
 }
 # VPC INFO
     variable "vpc_name" {
-      default = "Terravpc"
+     default = "Terravpc"
     }
     
     variable "vpc_cidr" {
