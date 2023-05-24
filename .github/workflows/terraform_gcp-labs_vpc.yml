@@ -72,7 +72,9 @@ jobs:
       with:
         workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER }} 
         service_account: ${{ secrets.SERVICE_ACCOUNT }}
-       
+  # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'   
     - id: 'gcloud'
       name: 'gcloud'
       run: | 
