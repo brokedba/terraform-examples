@@ -30,7 +30,7 @@ output "fire_wall_rules" {
      value       = google_compute_firewall.web-server.allow
 }           
 
-output "secondary_sub_ip_range" 
+output "secondary_sub_ip_range" {
       description = "Shows ingress rules of the Security group "
       value       = google_compute_subnetwork.terra_sub.secondary_ip_range
 }           
