@@ -65,8 +65,9 @@ jobs:
       run: |
         echo  ====== VALIDATE the Terraform configuration in ${{ env.STACK_DIR }}  ======
         terraform validate  
-    #  Authenticate with AWS using OIDC Workload Federated Identiry 
+    #  Authenticate with GCP  using OIDC Workload Federated Identiry 
     - name: 'Authenticate to Google Cloud'
+    - id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER }} 
@@ -154,7 +155,7 @@ jobs:
       with:
         path: |
           ${{ env.STACK_DIR }}/terraform.tfstate
-        key: ${{ runner.os }}-terraform-apply-aws-${{ github.run_id }}
+        key: ${{ runner.os }}-terraform-apply-gcp-${{ github.run_id }}
         restore-keys: |
           ${{ runner.os }}-terraform-apply-${{ github.run_id }}     
  # ############
@@ -192,7 +193,7 @@ jobs:
       with:
        path: |
          ${{ env.STACK_DIR }}/terraform.tfstate
-       key: ${{ runner.os }}-terraform-apply-aws-${{ github.run_id }}
+       key: ${{ runner.os }}-terraform-apply-gcp-${{ github.run_id }}
        restore-keys: |
          ${{ runner.os }}-terraform-apply             
     # terraform init not needed here . int files are already in the cache
@@ -225,4 +226,3 @@ jobs:
         gh actions-cache list
         gh actions-cache delete ${{ runner.os }}-terraform-apply-gcp-${{ github.run_id }} --confirm
         gh actions-cache delete ${{ runner.os }}-terraform-${{ env.STACK_DIR }}   --confirm
-
