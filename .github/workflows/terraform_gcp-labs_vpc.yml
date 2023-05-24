@@ -67,7 +67,7 @@ jobs:
         terraform validate  
     #  Authenticate with GCP  using OIDC Workload Federated Identiry 
     - name: 'Authenticate to Google Cloud'
-    - id: 'auth'
+      id: auth
       uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER }} 
