@@ -3,7 +3,7 @@ output "vpc_name" {
     value       = google_compute_network.terra_vpc.name
 }
 #output "vpc_id" {
-#      description = "id of created vpc. "
+#      description = "id of created vpc."
 #      value       = google_compute_network.terra_vpc.id
 #    } 
     
