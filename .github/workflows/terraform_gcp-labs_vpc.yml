@@ -132,10 +132,12 @@ jobs:
         # echo old terraform binary location: $TERRAPATH
     #  Authenticate with Azure using OIDC Workload Federated Identiry (i.e User Manged Identity)      
     - name: 'Authenticate to Google Cloud'
+      id: auth
       uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER }} 
         service_account: ${{ secrets.SERVICE_ACCOUNT }}
+    - run: echo "GOOGLE_OAUTH_ACCESS_TOKEN=${{ steps.auth.outputs.access_token }}" >> $GITHUB_ENV    
        
 # APPLY    
     - name: Terraform Apply
