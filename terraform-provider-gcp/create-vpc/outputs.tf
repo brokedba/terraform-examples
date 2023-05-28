@@ -4,7 +4,7 @@ output "vpc_name" {
 }
 # output "vpc_id" {
 #      description = "id of created vpc."
-#      value       = google_compute_network.terra_vpc.id
+#       value       = google_compute_network.terra_vpc.id
 #    } 
     
 output "Subnet_Name" {
