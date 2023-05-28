@@ -147,6 +147,7 @@ jobs:
       run: |
         echo  ====== APPLY execution for the Terraform configuration in ${{ env.STACK_DIR }}  ======
         echo "== Reusing cached version of terraform =="
+        export TF_VAR_project=${GCLOUD_PROJECT}
         sudo cp ./terraform  /usr/local/bin/
         terraform -v      
         terraform plan -input=false -no-color -out tf.plan
