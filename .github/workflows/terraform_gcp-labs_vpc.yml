@@ -26,18 +26,17 @@ jobs:
        shell: bash
        working-directory: ${{ env.STACK_DIR }}
 
-    steps:
+    steps:   
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3   
     - name: Add GCP projet masks      
       run: |
         echo "::add-mask::${CLOUDSDK_CORE_PROJECT}"
         echo "::add-mask::${CLOUDSDK_PROJECT}"
         echo "::add-mask::${GCLOUD_PROJECT}"
         echo "::add-mask::${GCP_PROJECT}"
-        echo "::add-mask::${GOOGLE_CLOUD_PROJECT}"
-        
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3   
+        echo "::add-mask::${GOOGLE_CLOUD_PROJECT}"    
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
