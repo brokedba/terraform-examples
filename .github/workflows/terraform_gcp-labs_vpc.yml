@@ -72,14 +72,14 @@ jobs:
         workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER }} 
         service_account: ${{ secrets.SERVICE_ACCOUNT }}
         token_format: 'access_token'
-      
-    - name: Add GCP projet masks    
-      run: |
+    - run: |
         echo "::add-mask::${CLOUDSDK_CORE_PROJECT}"
         echo "::add-mask::${CLOUDSDK_PROJECT}"
         echo "::add-mask::${GCLOUD_PROJECT}"
         echo "::add-mask::${GCP_PROJECT}"
-        echo "::add-mask::${GOOGLE_CLOUD_PROJECT}"       
+        echo "::add-mask::${GOOGLE_CLOUD_PROJECT}"          
+ #   - name: Add GCP projet masks    
+   
          
   # Install gcloud, `setup-gcloud` automatically picks up authentication from `auth`.
     - name: 'Set up Cloud SDK'
