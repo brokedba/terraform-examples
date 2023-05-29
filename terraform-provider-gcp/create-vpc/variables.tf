@@ -4,7 +4,7 @@
  #}
   variable  "gcp_credentials"{
    description = "default location of your service account json key file"
-  default = "~/gcp-key.json"
+   default = "~/gcp-key.json"
 }
 
 variable "project" {
