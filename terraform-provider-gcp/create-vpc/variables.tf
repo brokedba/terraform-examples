@@ -2,7 +2,7 @@
 # variable "prefix" {
 #  description = "The prefix used for all resources in this example"
  #}
-  variable  "gcp_credentials"{
+ variable  "gcp_credentials"{
    description = "default location of your service account json key file"
    default = "~/gcp-key.json"
 }
