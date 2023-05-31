@@ -30,6 +30,10 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3   
+      
+    - uses: 'github/actions-oidc-debugger@main'
+      with:
+       audience: 'https://iam.googleapis.com/projects/{{secrets.PROJECT_ID}}/locations/global/workloadIdentityPools/github-pool/providers/gitactions-oidc-provider'
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
