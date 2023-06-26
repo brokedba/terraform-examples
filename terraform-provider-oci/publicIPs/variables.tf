@@ -38,14 +38,14 @@ locals {
     primary_site = {  # key (display_name) => value (description)
       mgmt-public_ip-vm-a = "Public IP for Firewall Primary VM management Interface" 
       mgmt-public_ip-vm-b = "Public IP for Firewall Secondary VM management Interface" 
-      unstrust-floating-public_ip = "Floating Public IP for Firewall Untrust Interface" 
-      unstrust-floating-public_ip_frontend_1 = "Floating Public IP for Firewall Untrust Interface inbound (frontend cluster ip)"
+      untrust-floating-public_ip = "Floating Public IP for Firewall Untrust Interface" 
+      untrust-floating-public_ip_frontend_1 = "Floating Public IP for Firewall Untrust Interface inbound (frontend cluster ip)"
     },
     dr_site = {
       dr-mgmt-public_ip-vm-c = "DR Public IP for Firewall Primary VM management Interface" 
       dr-mgmt-public_ip-vm-d = "DR Public IP for Firewall Secondary VM management Interface"
-      dr-unstrust-floating-public_ip = "DR Floating Public IP for Firewall Untrust Interface"
-      dr-unstrust-floating-public_ip_frontend_1 = "DR Floating Public IP for Firewall Untrust Interface inbound (frontend cluster ip)"
+      dr-untrust-floating-public_ip = "DR Floating Public IP for Firewall Untrust Interface"
+      dr-untrust-floating-public_ip_frontend_1 = "DR Floating Public IP for Firewall Untrust Interface inbound (frontend cluster ip)"
       }
 }
 }
