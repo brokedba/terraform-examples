@@ -1,5 +1,5 @@
 output "vpc_name" {
-    description = "The Name of the newly created vpc"
+    description = "The Name of the newly created vpc "
        value      = google_compute_network.terra_vpc.name
  }
 #   output "vpc_id" {
