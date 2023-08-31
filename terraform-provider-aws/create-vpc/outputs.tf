@@ -1,5 +1,5 @@
 output "vpc_Name" {
-      description = "Name of created VPC. "
+      description = "Name of created VPC."
       value       = "${lookup(aws_vpc.terra_vpc.tags, "Name")}"
     }
 output "vpc_id" {
