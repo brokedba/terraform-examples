@@ -1,5 +1,5 @@
 output "vnet_name" {
-  description = "The Name of the newly created vNet"
+  description = "The Name of the newly created vNet "
   value       = azurerm_virtual_network.terra_vnet.name
 }
 output "vnet_id" {
