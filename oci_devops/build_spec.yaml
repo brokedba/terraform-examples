@@ -23,6 +23,7 @@ env:
   exportedVariables:
     - OBJECT_BUCKET_NAMESPACE_NAME
     - OBJECT_BUCKET_NAME
+    - ${SSH_PUB_KEY}
 
 #     cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} .
 
