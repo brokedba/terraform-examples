@@ -75,7 +75,7 @@ steps:
       echo " check the execution plan"
       export TF_VAR_region="${REGION}"
       export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
-    # export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
+# export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       export TF_VAR_private_key_path='./oci_key.pem'
       terraform plan  -out=${OCI_PRIMARY_SOURCE_DIR}/instance.tfplan   
