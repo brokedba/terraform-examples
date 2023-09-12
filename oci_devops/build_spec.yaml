@@ -15,6 +15,7 @@ env:
     #  aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
     #  ACCESS_KEY: "[ACCESS_KEY_VAULT_SECRET_OCID]"
     #  SECRET_KEY: "[SECRET_KEY_VAULT_SECRET_OCID]"
+    SSH_PUB_KEY: ${ssh_key_sec}
   # exportedVariables are made available to use as parameters in successor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
   exportedVariables:
@@ -73,7 +74,8 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       echo " check the execution plan"
       export TF_VAR_region="${REGION}"
-      export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
+      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
+    # export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       export TF_VAR_private_key_path='./oci_key.pem'
       terraform plan  -out=${OCI_PRIMARY_SOURCE_DIR}/instance.tfplan   
