@@ -15,13 +15,13 @@ env:
     #  aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
     #  ACCESS_KEY: "[ACCESS_KEY_VAULT_SECRET_OCID]"
     #  SECRET_KEY: "[SECRET_KEY_VAULT_SECRET_OCID]"
-  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # exportedVariables are made available to use as parameters in successor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
   exportedVariables:
     - OBJECT_BUCKET_NAMESPACE_NAME
     - OBJECT_BUCKET_NAME
 
-#     cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}    .
+#     cp -R ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} .
 
 steps:
   - type: Command
@@ -45,11 +45,11 @@ steps:
       cat <<EOF >provider.tf
       provider "oci" {
       auth = "ResourcePrincipal"
-      region = "${OCI_REGION}"
+      region = "${REGION}"
       }
       EOF
       echo "upload into a bucket"
-      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${OCI_REGION} --content-type auto --object-prefix "terraform_build/"
+      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${REGION} --content-type auto --object-prefix "terraform_build/"
   - type: Command
     timeoutInSeconds: 600
     name: "terraform init"
@@ -72,7 +72,7 @@ steps:
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       echo " check the execution plan"
-      export TF_VAR_region="${OCI_REGION}"
+      export TF_VAR_region="${REGION}"
       export TF_VAR_ssh_public_key=${ssh_public_key_1}${ssh_public_key_2}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       export TF_VAR_private_key_path='./oci_key.pem'
