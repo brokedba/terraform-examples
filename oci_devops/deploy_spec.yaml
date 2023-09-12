@@ -7,6 +7,9 @@ env:
   # these are local variables to the build config
   variables:
   vaultVariables:
+    SSH_PUB_KEY: ${ssh_key_sec}
+    TF_VAR_compartment_ocid: ${compartment_ocid_sec}
+    
   exportedVariables:
     - OBJECT_BUCKET_NAMESPACE_NAME
     - OBJECT_BUCKET_NAME
