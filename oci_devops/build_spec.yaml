@@ -11,10 +11,6 @@ env:
 
   vaultVariables:
   #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
-    #  aws_access_key_id: ocid1.vaultsecret.oc1.iad.xxxx
-    #  aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
-    #  ACCESS_KEY: "[ACCESS_KEY_VAULT_SECRET_OCID]"
-    #  SECRET_KEY: "[SECRET_KEY_VAULT_SECRET_OCID]"
     SSH_PUB_KEY: ${ssh_key_sec}
     compartment_ocid: ${compartment_ocid_sec}
 
@@ -43,8 +39,7 @@ steps:
       export OBJECT_BUCKET_NAME=${BUCKET_NAME}
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       echo "remove original provider section"
-      sed -i -e '14,20d' variables.tf
-      sed -i '/^variable "private_key_path"/d' variables.tf
+      sed -i -e '14,20d;27,30d;/^variable "tenancy_ocid"/d' variables.tf
       sed -i -e 's/file(var.ssh_public_key)/var.ssh_public_key/g' compute.tf
       echo "add new provider based on the principal authentication"
       cat <<EOF >provider.tf
