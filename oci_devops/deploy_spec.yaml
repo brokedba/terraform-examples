@@ -34,8 +34,6 @@ steps:
     command: |
       echo " check the execution plan"
       cd /tmp/terraform_build
-#      export TF_VAR_region="${REGION}"
-#      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       terraform validate
       rm -f  instance.tfplan
