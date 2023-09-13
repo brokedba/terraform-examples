@@ -39,7 +39,7 @@ steps:
       export OBJECT_BUCKET_NAME=${BUCKET_NAME}
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       echo "remove original provider section"
-      sed -i -e '14,20d;27,30d;/^variable "tenancy_ocid"/d' variables.tf
+      sed -i -e '14,20d;27,29d;/^variable "tenancy_ocid"/d' variables.tf
       sed -i -e 's/file(var.ssh_public_key)/var.ssh_public_key/g' compute.tf
       echo "add new provider based on the principal authentication"
       cat <<EOF >provider.tf
