@@ -7,13 +7,15 @@ env:
   # these are local variables to the build config
   variables:
   vaultVariables:
-    SSH_PUB_KEY: ${ssh_key_sec}
-    TF_VAR_compartment_ocid: ${compartment_ocid_sec}
+#    SSH_PUB_KEY: ${ssh_key_sec}
+#    TF_VAR_compartment_ocid: ${compartment_ocid_sec}
     
   exportedVariables:
     - OBJECT_BUCKET_NAMESPACE_NAME
     - OBJECT_BUCKET_NAME
     - TF_VAR_region
+    - TF_VAR_ssh_public_key
+    - TF_VAR_compartment_ocid
 
 steps:
   - type: Command
@@ -32,8 +34,8 @@ steps:
     command: |
       echo " check the execution plan"
       cd /tmp/terraform_build
-      export TF_VAR_region="${REGION}"
-      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
+#      export TF_VAR_region="${REGION}"
+#      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       terraform validate
       rm -f  instance.tfplan
