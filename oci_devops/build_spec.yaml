@@ -10,7 +10,7 @@ env:
   # you can then access the value of that secret in your build_spec.yaml commands
 
   vaultVariables:
-  #  EXAMPLE_SECRET: "YOUR-SECRET-OCID2"
+  #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
     SSH_PUB_KEY: ${ssh_key_sec}
     compartment_ocid: ${compartment_ocid_sec}
 
