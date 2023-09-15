@@ -49,6 +49,7 @@ steps:
       echo "number of lines after download"
       cat terraform.tfstate | wc -l
       echo "final destroy command"
+      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
       terraform destroy   --auto-approve
 
     onFailure:
