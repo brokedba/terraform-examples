@@ -22,21 +22,11 @@ steps:
       oci os object bulk-download -ns ${OBJECT_BUCKET_NAMESPACE_NAME} -bn ${OBJECT_BUCKET_NAME} --download-dir /tmp/   --prefix "terraform_build/"
       ls -ltr /tmp/terraform_build
       cd /tmp/terraform_build
-      terraform init
+ #     terraform init
       terraform fmt
-
-  - type: Command
-    timeoutInSeconds: 600
-    name: "terraform plan"
-    command: |
-      echo " check the execution plan"
-      cd /tmp/terraform_build
       export TF_VAR_ssh_public_key=${SSH_PUB_KEY}      
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
       terraform validate
-      rm -f  instance.tfplan
-      terraform plan -out=instance.tfplan   
-      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file instance.tfplan --content-type auto --name "terraform_build/instance.tfplan" --force
   - type: Command
     timeoutInSeconds: 600
     name: "terraform apply"

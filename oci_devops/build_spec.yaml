@@ -48,8 +48,7 @@ steps:
       region = "${REGION}"
       }
       EOF
-      echo "upload into a bucket"
-      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${REGION} --content-type auto --object-prefix "terraform_build/"
+
   - type: Command
     timeoutInSeconds: 600
     name: "terraform init"
@@ -59,6 +58,9 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR}
       terraform init 
       terraform fmt
+      echo "upload configurationand provider pluggin into a bucket"
+      oci os object bulk-upload -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir . --overwrite --region ${REGION} --content-type auto --object-prefix "terraform_build/"
+
   - type: Command
     timeoutInSeconds: 600
     name: "terraform validate"
@@ -66,17 +68,19 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       cat provider.tf 
       terraform validate
+
   - type: Command
     timeoutInSeconds: 600
     name: "terraform plan"
     command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       echo " check the execution plan"
+      cd ${OCI_PRIMARY_SOURCE_DIR}/${TF_PROVIDER_PATH}/${TF_STACK_DIR} 
       export TF_VAR_region="${REGION}"
       export TF_VAR_compartment_ocid="${compartment_ocid}"
-      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}
+      export TF_VAR_ssh_public_key=${SSH_PUB_KEY}      
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
-      terraform plan  -out=${OCI_PRIMARY_SOURCE_DIR}/instance.tfplan   
+      terraform plan -out=instance.tfplan   
+      oci os object put -ns ${BUCKET_NAMESPACE_NAME} -bn ${BUCKET_NAME} --file instance.tfplan --content-type auto --name "terraform_build/instance.tfplan" --force      
     onFailure:
       - type: Command
         command: |
