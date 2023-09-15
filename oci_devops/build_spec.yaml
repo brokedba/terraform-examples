@@ -19,7 +19,6 @@ env:
   exportedVariables:
     - OBJECT_BUCKET_NAMESPACE_NAME
     - OBJECT_BUCKET_NAME
-#    - TF_VAR_ssh_public_key
     - TF_VAR_compartment_ocid
     - TF_VAR_region
 
