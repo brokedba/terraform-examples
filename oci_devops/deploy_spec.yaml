@@ -22,6 +22,7 @@ steps:
       oci os object bulk-download -ns ${OBJECT_BUCKET_NAMESPACE_NAME} -bn ${OBJECT_BUCKET_NAME} --download-dir /tmp/   --prefix "terraform_build/"
       ls -ltr /tmp/terraform_build
       cd /tmp/terraform_build
+      chmod 777 -R .terraform/
       terraform fmt
       export TF_VAR_ssh_public_key=${SSH_PUB_KEY}      
       echo "ssh public key => ${TF_VAR_ssh_public_key} "
