@@ -5,9 +5,8 @@ This directory contains Terraform configuration files showing how to create spec
 - The launch-instance contains both the vpc configuration we used above and the instance provisioning configuration.
 -  For details on how to run these samples please refere to my blog post
 
-[Terraform for dummies part 7: Deploy a static website on Alibaba Cloud](http://www.brokedba.blogspot.com/2023/11/terraform-for-dummies-part-7-deploy.html)
-![image](https://github.com/brokedba/terraform-examples/assets/29458929/4573c2f5-7a79-44f5-a3f8-a89e2a7c5a9a)
-
+[Terraform for dummies part 6: Deploy a static website on Alibaba Cloud](http://www.brokedba.blogspot.com/2023/11/terraform-for-dummies-part-7-deploy.html)
+![image](https://github.com/brokedba/terraform-examples/assets/29458929/07e6e70a-1d8e-4f17-a794-522ba9b80231)
 
 ![Topology1](https://github-production-user-asset-6210df.s3.amazonaws.com/29458929/280509394-9114f2cc-2c06-4372-8d13-b01077f4b850.png)
 
