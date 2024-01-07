@@ -14,6 +14,6 @@ http://www.brokedba.com/2021/12/my-terraform-labs-2021-cloud-recap.html
 # Variables 
 Some variables used to deploy the steps have default values, check those before deployment to ensure they match your requirements. For more information, there are tables of inputs and outputs for the Terraform configs, each with a detailed description of their variables. Look for variables marked as not required in the section Inputs of these READMEs:
 # Recently added Cloud stack
-- ALIBABA CLOUD
+- [ALIBABA CLOUD ](/terraform-provider-alicloud)
 # 🎦 Repository Visualization
  ![Visualization of the codebase](./diagram.svg)
