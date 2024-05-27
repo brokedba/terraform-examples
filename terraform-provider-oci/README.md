@@ -1,8 +1,8 @@
 # Oracle Cloud Infrastructure Provider Examples
 
 This directory contains Terraform configuration files showing how to create specific resources. 
-The create-vcn is intended to demonstrate how to create a vcn along with the route table, the subnets and their security lists.
-The launch-instance contains both the vcn configuration we used above and the instance provisioning configuration .
+1. **create-vcn** is intended to demonstrate how to create a vcn along with the route table, the subnets and their security lists.
+2. **launch-instance** contains both the vcn configuration we used above and the instance provisioning configuration .
  For details on how to run these samples please refere to my blog post 
  https://brokedba.blogspot.com/2020/07/terraform-for-dummies-launch-instance.html
 
@@ -11,6 +11,16 @@ The launch-instance contains both the vcn configuration we used above and the in
 `` Please run either one of them at a time ( apply and destroy before runing the other) as the vcn attributes are the same .
 ``
 
+3. **compartments**
+   - see blog : http://www.brokedba.com/2023/08/deploy-multilevel-oci-sub-compartment.html
+
+5. **Database-system**
+   - see blog : http://www.brokedba.com/2023/08/deploy-multilevel-oci-sub-compartment.html
+
+7. **public IPs**
+   - see blog :  http://www.brokedba.com/2023/06/how-to-deploy-multi-region-resources.html
+9. **oke**
+   - see blog : TBD
 
  **Terraform Console**:
 - ***Functions:*** Although terraform is a declarative language, there are still myriads of functions you can use to process strings/number/lists/mappings etc. 
