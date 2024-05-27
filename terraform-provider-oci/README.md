@@ -15,7 +15,7 @@ This directory contains Terraform configuration files showing how to create spec
    - see blog : http://www.brokedba.com/2023/08/deploy-multilevel-oci-sub-compartment.html
 
 5. **Database-system**
-   - see blog : http://www.brokedba.com/2023/08/deploy-multilevel-oci-sub-compartment.html
+   - see blog :  http://www.brokedba.com/2022/04/terraform-for-dummies-part-6-deploy.html
 
 7. **public IPs**
    - see blog :  http://www.brokedba.com/2023/06/how-to-deploy-multi-region-resources.html
