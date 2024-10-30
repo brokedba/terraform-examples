@@ -4,7 +4,7 @@
 variable "aws_region" {
    default = "us-east-1"
 }
-# VPC INFO
+# VPC INFO :
     variable "vpc_name" {
      default = "Terravpc"
     }
