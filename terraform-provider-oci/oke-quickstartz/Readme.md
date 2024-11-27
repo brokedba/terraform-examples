@@ -1,5 +1,6 @@
-<p align="center">
-<img src="https://github.com/user-attachments/assets/aa96cdeb-c799-44b1-b1dd-2ed948ba3c16" width="600px" >
+<p align="center"> 
+
+<img src="https://github.com/user-attachments/assets/06ba6698-9c0a-4e3e-bfa1-82fc74395f7f" width="600px" >
 </p>
 <!-- BEGIN_TF_DOCS -->
 
