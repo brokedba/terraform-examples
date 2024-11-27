@@ -1,3 +1,6 @@
+<p align="center">
+<img src="https://github.com/user-attachments/assets/aa96cdeb-c799-44b1-b1dd-2ed948ba3c16" width="600px" >
+</p>
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
