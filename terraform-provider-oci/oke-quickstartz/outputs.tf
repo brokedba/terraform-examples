@@ -20,13 +20,17 @@ output "deployed_oke_kubernetes_version" {
 output "deployed_to_region" {
   value = module.oke.deployed_to_region
 }
+output "cluster_endpoint_visibility" {
+  description = "The visibility of the cluster endpoint."
+  value       = var.cluster_endpoint_visibility
+}
 output "kubeconfig" {
   value     = module.oke.kubeconfig
   sensitive = true
 }
 output "kubeconfig_for_kubectl" {
   value       = module.oke.kubeconfig_for_kubectl
-  description = "If using Terraform locally, this command set KUBECONFIG environment variable to run kubectl locally"
+  description = "If using Terraform locally, this sets KUBECONFIG environment variable to run kubectl locally"
 }
 output "oke_cluster_ocid" {
   value = module.oke.oke_cluster_ocid
