@@ -3,6 +3,7 @@
 <img src="https://github.com/user-attachments/assets/06ba6698-9c0a-4e3e-bfa1-82fc74395f7f" width="600px" >
 </p>
 <!-- BEGIN_TF_DOCS -->
+
 Please read my blog for further details [here](https://cloudthrill.ca/my-terraform-oci-oke-quickstart-fork) 
 
 ## Requirements
