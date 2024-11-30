@@ -204,6 +204,13 @@ variable "cluster_cni_type" {
   }
 }
 
+
+# OIDC
+variable "oke_cluster_oidc_discovery" {
+  default     = false
+  description = "Enable OpenID Connect discovery in the cluster"
+}
+
 ## OKE Encryption details
 variable "use_encryption_from_oci_vault" {
   default     = false

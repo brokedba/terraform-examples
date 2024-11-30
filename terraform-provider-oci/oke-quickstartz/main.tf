@@ -66,6 +66,7 @@ module "oke" {
   ## create_new_oke_cluster
   create_new_oke_cluster  = var.create_new_oke_cluster
   existent_oke_cluster_id = var.existent_oke_cluster_id
+  oke_cluster_oidc_discovery   = var.oke_cluster_oidc_discovery
 
   ## Network Details
   vcn_id                 = module.vcn.vcn_id
