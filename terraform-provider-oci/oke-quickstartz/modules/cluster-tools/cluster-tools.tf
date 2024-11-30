@@ -15,15 +15,15 @@ locals {
   # Helm repos
   helm_repository = {
     ingress_nginx          = "https://kubernetes.github.io/ingress-nginx"
-    ingress_nginx_version  = "4.6.1"
+    ingress_nginx_version  = "4.11.2" #"4.6.1"
     jetstack               = "https://charts.jetstack.io" # cert-manager
-    jetstack_version       = "1.12.0"                     # cert-manager
+    jetstack_version       = "1.15.3" #"1.12.0"           # cert-manager
     grafana                = "https://grafana.github.io/helm-charts"
-    grafana_version        = "6.56.5"
+    grafana_version        = "8.4.8" #"6.56.5"
     prometheus             = "https://prometheus-community.github.io/helm-charts"
-    prometheus_version     = "22.6.2"
+    prometheus_version     = "25.26.0" #"22.6.2"
     metrics_server         = "https://kubernetes-sigs.github.io/metrics-server"
-    metrics_server_version = "3.10.0"
+    metrics_server_version = "3.12.1" #"3.10.0"
   }
   use_cluster_tools_namespace = anytrue([var.grafana_enabled, var.ingress_nginx_enabled, var.cert_manager_enabled, var.prometheus_enabled]) ? true : false
 }

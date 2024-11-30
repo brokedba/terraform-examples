@@ -51,10 +51,12 @@ resource "oci_containerengine_cluster" "oke_cluster" {
     cni_type = var.cni_type
   }
 
+# open_id_connect_discovery {
+#   is_open_id_connect_discovery_enabled =false
+# } 
   lifecycle {
     ignore_changes = [freeform_tags, defined_tags, kubernetes_version, id]
   }
-
   count = var.create_new_oke_cluster ? 1 : 0
 }
 

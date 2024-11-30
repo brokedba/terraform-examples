@@ -30,7 +30,7 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
       pod_subnet_ids    = var.vcn_native_pod_networking_subnet_ocid != null ? [var.vcn_native_pod_networking_subnet_ocid] : [] #[var.vcn_native_pod_networking_subnet_ocid]
     }
     # nsg_ids       = []
-    size = 3 # var.node_pool_min_nodes
+    size = var.node_pool_min_nodes
     # is_pv_encryption_in_transit_enabled = var.node_pool_node_config_details_is_pv_encryption_in_transit_enabled
     kms_key_id    = var.oci_vault_key_id_oke_node_boot_volume != "" ? var.oci_vault_key_id_oke_node_boot_volume : null
     freeform_tags = var.worker_nodes_tags.freeformTags
@@ -45,11 +45,11 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
     }
   }
 
-  # node_source_details {
-  #   source_type             = "IMAGE"
-  #   image_id                = "ocid1.image.oc1.ca-toronto-1.aaaaaaaaeonnf55icwpffvzbzfgva7fkf5mrnd7f53ope255vjmpbufcqlna" #lookup(data.oci_core_images.node_pool_images.images[0], "id")
-  #   boot_volume_size_in_gbs = var.node_pool_boot_volume_size_in_gbs
-  # }
+  node_source_details {
+    source_type             = "IMAGE"
+    image_id                = lookup(data.oci_core_images.node_pool_images.images[0], "id")
+    boot_volume_size_in_gbs = var.node_pool_boot_volume_size_in_gbs
+  }
 
   # node_eviction_node_pool_settings {
   #   eviction_grace_duration = var.node_pool_node_eviction_node_pool_settings_eviction_grace_duration #PT60M
@@ -82,7 +82,8 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
 
   lifecycle {
     ignore_changes = [
-      node_config_details.0.size
+      node_config_details.0.size,
+      node_source_details.0.image_id  # Add this line to ignore changes to image_id
     ]
   }
 

@@ -25,10 +25,10 @@ resource "helm_release" "grafana" {
     type  = "string"
   }
 
-  set {
-    name  = "grafana\\.ini.server.serve_from_sub_path"
-    value = "true"
-  }
+  # set {
+  #   name  = "grafana\\.ini.server.serve_from_sub_path"
+  #   value = "true"
+  # }
 
   values = [
     <<EOF

@@ -7,7 +7,7 @@ terraform {
   required_providers {
     oci = {
       source  = "oracle/oci"
-      version = "~> 4"
+      version = ">= 4"
       # https://registry.terraform.io/providers/oracle/oci/
     }
     local = {

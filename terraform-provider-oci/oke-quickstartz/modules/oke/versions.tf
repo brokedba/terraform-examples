@@ -7,12 +7,12 @@ terraform {
   required_providers {
     oci = {
       source  = "oracle/oci"
-      version = "~> 4, < 5"
+      version = ">= 5" #"~> 4, < 5"
       # https://registry.terraform.io/providers/oracle/oci/
     }
     local = {
       source  = "hashicorp/local"
-      version = "~> 2"
+      version = ">= 2" #"~> 2"
       # https://registry.terraform.io/providers/hashicorp/local/
     }
   }

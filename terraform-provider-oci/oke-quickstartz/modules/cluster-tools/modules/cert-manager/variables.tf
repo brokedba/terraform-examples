@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2022-24 Oracle and/or its affiliates. All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
 # 
 
@@ -10,7 +10,7 @@ variable "chart_repository" {
   default = "https://charts.jetstack.io"
 }
 variable "chart_version" {
-  default = "1.9.1"
+  default = "1.15.3" # default = "1.9.1"
 }
 variable "ingress_email_issuer" {
   default     = "no-reply@example.cloud"

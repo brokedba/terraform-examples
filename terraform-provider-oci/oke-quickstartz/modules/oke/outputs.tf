@@ -12,7 +12,7 @@ output "deployed_to_region" {
   value = var.region
 }
 output "dev" {
-  value = "Made with \u2764 by Oracle Developers"
+  value = "Made with \u2764 by Oracle Developers. Forked and Hacked by @Clouddude🍉"
 }
 output "kubeconfig" {
   value = data.oci_containerengine_cluster_kube_config.oke.content
