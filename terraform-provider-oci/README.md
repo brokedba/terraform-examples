@@ -20,7 +20,7 @@ This directory contains Terraform configuration files showing how to create spec
 7. **public IPs**
    - see blog :  http://www.brokedba.com/2023/06/how-to-deploy-multi-region-resources.html
 9. **oke**
-   - see blog : TBD
+   - see blog : [my-terraform-oci-oke-quickstart-fork](https://cloudthrill.ca/my-terraform-oci-oke-quickstart-fork)
 
  **Terraform Console**:
 - ***Functions:*** Although terraform is a declarative language, there are still myriads of functions you can use to process strings/number/lists/mappings etc. 
