@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/677bc957-9204-4d1c-b3eb-06814757c80f)
 
 ## Getting started 
 In order to deploy this terraform configuration you must:
