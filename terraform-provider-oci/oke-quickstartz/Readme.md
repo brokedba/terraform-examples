@@ -4,7 +4,9 @@
 </p>
 <!-- BEGIN_TF_DOCS -->
 
-Please read my blog for further details [here](https://cloudthrill.ca/my-terraform-oci-oke-quickstart-fork) 
+Please read my blog for further details [here](https://cloudthrill.ca/my-terraform-oci-oke-quickstart-fork) . 
+
+**Note:** The private endpoint scenario only works from OCI Resource managerfor now . THe bug for the local TF execution is currently being investigated.
 
 ## Requirements
 
