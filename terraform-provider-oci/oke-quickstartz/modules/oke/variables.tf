@@ -126,6 +126,11 @@ locals {
 locals {
   oke_compartment_ocid = var.compartment_ocid
 }
+# OIDC
+variable "oke_cluster_oidc_discovery" {
+  default       = false
+  description = "Enable OpenID Connect discovery in the cluster"
+}
 
 # Deployment Details + Freeform Tags
 variable "cluster_tags" {

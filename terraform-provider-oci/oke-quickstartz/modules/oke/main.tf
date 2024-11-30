@@ -40,6 +40,9 @@ resource "oci_containerengine_cluster" "oke_cluster" {
       freeform_tags = var.load_balancers_tags.freeformTags
       # defined_tags  = var.load_balancers_tags.definedTags
     }
+    open_id_connect_discovery {
+      is_open_id_connect_discovery_enabled = var.oke_cluster_oidc_discovery
+   }
   }
   image_policy_config {
     is_policy_enabled = false
@@ -51,9 +54,6 @@ resource "oci_containerengine_cluster" "oke_cluster" {
     cni_type = var.cni_type
   }
 
-# open_id_connect_discovery {
-#   is_open_id_connect_discovery_enabled =false
-# } 
   lifecycle {
     ignore_changes = [freeform_tags, defined_tags, kubernetes_version, id]
   }
