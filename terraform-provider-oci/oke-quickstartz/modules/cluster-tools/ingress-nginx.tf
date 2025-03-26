@@ -81,8 +81,17 @@ resource "helm_release" "ingress_nginx" {
     value = var.ingress_load_balancer_shape_flex_max
     type  = "string"
   }
-
   count = var.ingress_nginx_enabled ? 1 : 0
+#  set {  # Ollama inference service endpoint  
+#    name  = "controller.service.ports.ollama"
+#    value = "11434"
+#  }
+#
+#  set {
+#    name  = "controller.service.targetPorts.ollama"
+#    value = "http"
+#  }
+
 }
 
 ## Kubernetes Service: ingress-nginx-controller
