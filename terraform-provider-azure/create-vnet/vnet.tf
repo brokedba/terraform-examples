@@ -6,7 +6,7 @@ provider "azurerm" {
              }
     }
 #################
-# RESOURCE GROUP
+# RESOURCE GROUP #
 #################
 
 resource "azurerm_resource_group" "rg" {
