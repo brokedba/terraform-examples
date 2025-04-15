@@ -12,6 +12,7 @@ env:
   #ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   TF_VAR_az_location: "${{ vars.az_location }}"
   TF_VAR_prefix: "${{ vars.TF_APP_PREFIX }}" 
+  TF_VAR_az_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
 permissions:
