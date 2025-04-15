@@ -6,6 +6,10 @@ variable "prefix" {
 variable "az_location"  {
     default = "eastus"
     }
+variable "az_subscription_id"  {
+    default = "eastus"
+    }
+
 # VPC INFO
     variable "vnet_name" {
       default = "Terravnet"
