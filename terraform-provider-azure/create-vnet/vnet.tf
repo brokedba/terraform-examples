@@ -4,7 +4,7 @@ terraform {
       required_version = ">= 1.0.3"
      }
 provider "azurerm" {
-    subscription_id = "${var.azure_subscription_id}"
+    subscription_id = "${var.az_subscription_id}"
     features  { 
              }
     }
