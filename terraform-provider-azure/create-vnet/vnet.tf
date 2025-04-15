@@ -1,10 +1,12 @@
 ### note: In version 4.0 of the Azure Provider, it's now required to specify the Azure Subscription ID when configuring a provider instance in your config.
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/4.0-upgrade-guide#specifying-subscription-id-is-now-mandatory
+# see link : https://tinyurl.com/azrmv4subid
+#  If the principal running Terraform has insufficient permissions to auto register Resource Providers , the run will error. To avoid the issue set resource_provider_registrations = "none" https://tinyurl.com/azureterrareg
 terraform {
       required_version = ">= 1.0.3"
      }
 provider "azurerm" {
     subscription_id = "${var.az_subscription_id}"
+    resource_provider_registrations = "none" 
     features  { 
              }
     }
