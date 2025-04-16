@@ -15,7 +15,7 @@ env:
   TF_VAR_az_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   STACK_DIR: ${{ vars.TF_STACK_DIR }}
   
-permissions:
+permissions:        # This can be added at login job level too.
   id-token: write
 
 jobs:
