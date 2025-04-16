@@ -1,3 +1,4 @@
+# This config will generate a NetworkWatcherRG in a new susbcription  
 # Azure account region and authentication 
 variable "prefix" {
  description = "The prefix used for all resources in this example"
