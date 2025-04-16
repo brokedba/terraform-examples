@@ -1,4 +1,5 @@
-### 04-2025 note: In version 4.0 of the Azure Provider, it's now required to specify the Azure Subscription ID when configuring a provider instance in your config.
+### Update 04-2025
+### note: In version 4.0 of the Azure Provider, it's now required to specify the Azure Subscription ID when configuring a provider instance in your config.
 # see link : https://tinyurl.com/azrmv4subid
 #  v3.90 If the principal running Terraform has insufficient permissions to auto register Resource Providers, the run will error. 
 # To avoid the issue set resource_provider_registrations = "none"  see link: https://tinyurl.com/azureterrareg 
