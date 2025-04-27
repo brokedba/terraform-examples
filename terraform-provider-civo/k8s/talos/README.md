@@ -4,8 +4,7 @@
 This repository provides a **lightweight Terraform template** to deploy a **Talos Kubernetes cluster** on **Civo Cloud**, enhanced with:
 - ✅ Traefik as the Ingress Controller
 - ✅ Cert-Manager with Self-Signed TLS
-- ✅ Clean, modular Terraform structure
-- ✅ Very fast deployment — no AI or heavy components
+- ✅ Clean, modular Terraform structure 
 
 ## 📋 What's Included
 - ✅ **Civo Kubernetes (Talos) Cluster**
