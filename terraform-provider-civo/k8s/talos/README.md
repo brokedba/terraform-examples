@@ -12,6 +12,8 @@ This repository provides a **lightweight Terraform template** to deploy a **Talo
 - ✅ **Traefik** Ingress Controller (via Helm)
 - ✅ **Cert-Manager** for TLS certificates
 - ✅ **Self-Signed ClusterIssuer** setup
+- ✅ **Grafana**
+- ✅ **Prometheus**
 - ✅ **Minimal setup** — easy to customize
 
 ## 🔧 Prerequisites
