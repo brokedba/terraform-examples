@@ -11,6 +11,7 @@
 
 # .tfvars files
 *.tfvars
+*env-vars
 
 # Local Files
 **/.DS_Store
