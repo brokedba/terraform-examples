@@ -3,14 +3,15 @@
 ## 🚀 Overview
 This repository provides a **lightweight Terraform template** to deploy a **Talos Kubernetes cluster** on **Civo Cloud**, enhanced with:
 - ✅ Traefik as the Ingress Controller
-- ✅ Cert-Manager with Self-Signed TLS
-- ✅ Clean, modular Terraform structure 
+- ✅ Cert-Manager with Self-Signed/ketsEncrypt TLS
+- ✅ Clean, modular structure with monitoring stack included 
 
 ## 📋 What's Included
 - ✅ **Civo Kubernetes (Talos) Cluster**
 - ✅ **Traefik** Ingress Controller (via Helm)
 - ✅ **Cert-Manager** for TLS certificates
 - ✅ **Self-Signed ClusterIssuer** setup
+- ✅ **LetsEncrypt http01 ClusterIssuer** setup
 - ✅ **Grafana**
 - ✅ **Prometheus**
 - ✅ **Minimal setup** — easy to customize
