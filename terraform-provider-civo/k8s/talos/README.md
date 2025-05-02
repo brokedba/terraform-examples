@@ -75,7 +75,22 @@ Up to 10000 certificates can be issued per registered domain (i.e we used nip.io
 ```Error
 Failed to create Order: 429 urn:ietf:params:acme:error:rateLimited: too many certificates (10000) already issued for "nip.io"
 ```
-
+## PodSecurity Restrictions fails node-exporter creation
+due to extra privilege necessary to create node exporter pods that scrape Hostnetwork and HostPID metrics , I had to add a label for cluster-tools namespace to make it work.
+```
+Error creating: pods "prometheus-prometheus-node-exporter-b6jmf" is forbidden: violates PodSecurity "baseline:latest": host namespaces (hostNetwork=true, hostPID=true), hostPath volumes (volumes "proc", "sys", "root"), hostPort (container "node-exporter" uses hostPort 9100)
+```
+**Namespace Pod Secuirity label**
+```
+resource "kubernetes_namespace" "cluster_tools" {
+  metadata {
+    name = var.cluster_tools_namespace
+    # allow for privileged prometheus-node-exporter to scrape Hostnetwork & HostPID metrics
+     labels = {
+      "pod-security.kubernetes.io/enforce" = "privileged"
+    # }
+  }
+```
 ## 🛠 Future Enhancements 
 - Add External DNS integration
 - Enable ArgoCD
