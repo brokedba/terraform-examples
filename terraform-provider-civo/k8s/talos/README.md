@@ -66,11 +66,15 @@ export TF_VAR_ingress_email_issuer="no-reply@example.cloud"
 terraform init
 terraform apply -auto-approve
 ```
-### monitor the cluster
+### Monitor the cluster
+you can find the Grafana URL through this output `grafana_url` and add grafana suffix  i.e http://grafan.d402f4e6.nip.io/grafana
+![WhatsApp Image 2025-04-30 at 19 03 10_b4b00265](https://github.com/user-attachments/assets/1d5e27a7-5b6e-47fa-b236-e79ba6287af6)
+- TLS (through K9s)🚀 
+
 ![WhatsApp Image 2025-04-30 at 11 54 34_e7656662](https://github.com/user-attachments/assets/bc759be4-2dda-480a-b00a-68e6f1c307b3)
 ![WhatsApp Image 2025-04-30 at 11 56 21_6811d470](https://github.com/user-attachments/assets/73870670-1d88-4505-bc4a-630c1ab511a0)
 ![WhatsApp Image 2025-04-30 at 12 01 34_ce03c190](https://github.com/user-attachments/assets/5af6c84d-eca5-4ef5-80ac-137d5be6121c)
-![WhatsApp Image 2025-04-30 at 19 03 10_b4b00265](https://github.com/user-attachments/assets/1d5e27a7-5b6e-47fa-b236-e79ba6287af6)
+
 
 ## TLS troubleshooting: 
 1. If a Let's Encrypt certificate fails with an invalid Order error 400 that's either because the issuer or cet-manager weren't 100 ready while grafana ingress was being deployed
