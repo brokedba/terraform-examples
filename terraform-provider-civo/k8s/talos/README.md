@@ -1,5 +1,5 @@
 # My Terraform Template for Civo Kubernetes Cluster (Talos)
-
+![img](https://github.com/brokedba/brokedba/blob/gh-pages/images/civo_grafana_tls.png?raw=true)
 ## 🚀 Overview
 This repository provides a **lightweight Terraform template** to deploy a **Talos Kubernetes cluster** on **Civo Cloud**, enhanced with:
 - ✅ Traefik as the Ingress Controller
