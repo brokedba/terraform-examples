@@ -33,13 +33,27 @@ cd terraform-examples/terraform-provider-civo/k8s/talos
 ```
 
 ### 2️⃣ Set up your variables
-Create a terraform.tfvars file:
+Create a terraform.tfvars or env-vars file:
 
 ```hcl
-civo_token = "your-civo-api-key"
-region     = "NYC1"
-grafana_enabled="true"
-prometheus_enabled="true"
+export CIVO_TOKEN="YOUR_CIVO_API_KEY"
+export TF_VAR_region="NYC1"
+export TF_VAR_compute_type="standard"
+export TF_VAR_cluster_node_count=2
+export TF_VAR_cluster_name_prefix="cloudthrill"
+export TF_VAR_kubernetes_version="talos-v1.5.0"
+export TF_VAR_label="k8s-pool" 
+export TF_VAR_kubernetes_namespace="my-namespace"
+### NETWORK ####
+export TF_VAR_network_name="default"
+export TF_VAR_network_cidr="10.20.0.0/16"
+# Monitoring
+export TF_VAR_grafana_enabled="true"  
+export TF_VAR_prometheus_enabled="true"
+export TF_VAR_app_name="grafana"
+export TF_VAR_metrics_server_enabled="true"
+export TF_VAR_ingress_email_issuer="no-reply@example.cloud"
+# cluster_node_size="g4s.kube.medium"
 ```
 Or use a source file using TF_VAR exports:
 ```bash
