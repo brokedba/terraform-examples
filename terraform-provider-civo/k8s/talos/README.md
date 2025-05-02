@@ -12,7 +12,7 @@ This repository provides a **lightweight Terraform template** to deploy a **Talo
 - ✅ **Cert-Manager** for TLS certificates
 - ✅ **Self-Signed ClusterIssuer** setup
 - ✅ **LetsEncrypt http01 ClusterIssuer** setup
-- ✅ **Grafana**
+- ✅ **Grafana** with Letsencrypt TLS certificate
 - ✅ **Prometheus**
 - ✅ **Minimal setup** — easy to customize
 
