@@ -22,7 +22,7 @@ ingress_hosts_include_nip_io = true
 kubernetes_api_access = [
   "0.0.0.0/0"
 ]
-kubernetes_namespace   = "my-amespace"
+kubernetes_namespace   = "my-namespace"
 kubernetes_version     = "talos-v1.5.0"
 label                  = "k8s-pool"
 metrics_server_enabled = true
