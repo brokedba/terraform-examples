@@ -1,7 +1,7 @@
 app_name                = "grafana"
 applications            = "metrics-server,cert-manager,traefik2-nodeport"
 chart_version           = "1.15.3"
-cluster_name_prefix     = "cloudthrill2"
+cluster_name_prefix     = "cloudthrill"
 cluster_node_count      = 2
 cluster_node_size       = ""
 cluster_tools_namespace = "cluster-tools"
