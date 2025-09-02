@@ -40,7 +40,7 @@ variable "az_location" {
         default = "30"
       }
       variable "vm_size" {
-        default = "Standard_B1s"
+        default = "Basic_A2"
       }
 
 variable  "os_publisher" {
