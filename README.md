@@ -5,6 +5,7 @@ This repository is aimed to gather labs from different terraform providers to st
 - [OCI](https://github.com/brokedba/terraform-examples/tree/master/terraform-provider-oci)
 - [GCP](https://github.com/brokedba/terraform-examples/tree/master/terraform-provider-gcp)
 - [AliBabaCloud](https://github.com/brokedba/terraform-examples/tree/master/terraform-provider-alicloud)
+-  [Civo Cloud](https://github.com/brokedba/terraform-examples/tree/master/terraform-provider-civo)
 - [Libvirt (for KVM On-prem )](https://github.com/brokedba/terraform-examples/tree/master/terraform-provider-libvirt)
 
 Please visit my recap blog post for more information ![terraform_for_dummies](https://github.com/user-attachments/assets/efade26f-8cc3-4a69-970e-412e1ea54d31)
